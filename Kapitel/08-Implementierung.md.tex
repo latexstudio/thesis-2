@@ -1,0 +1,51 @@
+\chapter{Implementierung}\label{implementierung}
+
+\blindtext[1]
+
+\section{Entwicklungsumgebung}\label{entwicklungsumgebung}
+
+\begin{itemize}
+\tightlist
+\item
+  Gitlab, Tickets, CI, etc.
+\item
+  Heroku
+\end{itemize}
+
+\section{Verwendete
+Software-Komponenten}\label{verwendete-software-komponenten}
+
+\begin{itemize}
+\tightlist
+\item
+  Ionic/Quasar: Macht Sinn, wenn \emph{eine} App im Browser und mobil
+  laufen muss. Hier gibt es zwei alleinstehende Apps, die völlig
+  verschiedene Dinge tun
+\end{itemize}
+
+\section{Ausgewählte
+Implementierungsdetails}\label{ausgewuxe4hlte-implementierungsdetails}
+
+\subsection{Cool \#1}\label{cool-1}
+
+\subsection{Cool \#2}\label{cool-2}
+
+\subsection{Integration von xnes/snes9x.js und
+vue.js}\label{integration-von-xnessnes9x.js-und-vue.js}
+
+Drei notwendige Schritte:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Deaktivieren von eslint für Kompilierungsergebnis snes9x.js,
+\item
+  Webpack-Konfiguration:
+  \texttt{node:\ \{fs:\ \textquotesingle{}empty\textquotesingle{}\}},
+\item
+  Anfügen von \texttt{export\ \{Module\ as\ default\}} ans Ende von
+  snes9x.js, damit die Datei korrekt von Webpack erkannt wird.
+\end{enumerate}
+
+\section{Vollständigkeit}\label{vollstuxe4ndigkeit}

@@ -1,0 +1,436 @@
+\documentclass[ngerman]{scrbook}
+% scrbook lacks \abstract
+% Other differences:
+% https://tex.stackexchange.com/questions/36988/regarding-the-book-report-and-article-document-classes-what-are-the-mai
+
+\KOMAoptions{
+    paper=a4,
+    pagesize=auto,
+    headsepline=true, % see pagestyle
+    numbers=noendperiod,
+    %toc=chapterentrywithdots, % prefer tocstyle
+    listof=totoc,
+    %listof=entryprefix,
+    % Kapitel N
+    % Überschrift
+    %headings=openright,
+    headings=big,%twolinechapter,
+    chapterprefix=true,
+    parskip=full,
+    twoside=true,
+    fontsize=12pt,
+    DIV=15,
+    %DIV=calc,
+    % Für die PDF-Variante brauche ich keinen BCOR.
+    BCOR=10mm,
+    %BCOR=8.25mm,
+    %BCOR=0mm,
+    headinclude=true,
+    footinclude=false,
+}
+
+%\usepackage{pdfcomment}
+
+\setkomafont{dictumtext}{\itshape\small}
+\setkomafont{dictumauthor}{\normalfont}
+\renewcommand*\dictumwidth{\linewidth}
+\renewcommand*\dictumauthorformat[1]{--- #1}
+\renewcommand*\dictumrule{}
+
+\PassOptionsToPackage{ngerman}{babel}
+    \usepackage{babel}
+\PassOptionsToPackage{T1}{fontenc}
+    \usepackage{fontenc}
+\PassOptionsToPackage{utf8}{inputenc}
+    \usepackage{inputenc}
+\PassOptionsToPackage{dvipsnames,pdftex,svgnames,table,usenames}{xcolor}
+    \usepackage{xcolor}
+
+\newcommand{\myauthor}{Kai Kühne}  %% also used for PDF metadata (hyperref)
+\newcommand{\mycolorlinks}{true}  %% "true" or "false"
+%\newcommand{\mydispositioncolor}{30,103,182}
+%\newcommand{\mydispositioncolor}{34, 72, 112}
+%\newcommand{\mydispositioncolor}{0, 105, 146}
+%\newcommand{\mydispositioncolor}{14, 121, 178}
+%\newcommand{\mydispositioncolor}{173, 52, 62} % red
+%\newcommand{\mydispositioncolor}{12, 116, 137}
+%\newcommand{\mydispositioncolor}{35, 100, 170}
+%\newcommand{\mydispositioncolor}{0, 52, 89}
+%\newcommand{\mydispositioncolor}{24, 48, 89}
+%\newcommand{\mydispositioncolor}{39, 111, 191}
+\newcommand{\mydispositioncolor}{22, 96, 136}
+%\newcommand{\mydispositioncolor}{2, 57, 74}
+%\newcommand{\mydispositioncolor}{201, 34, 18}
+\newcommand{\secondcolor}{62, 124, 192}
+\newcommand{\thirdcolor}{100, 151, 208}
+%\newcommand{\mykeywords}{KEYWORDS}  %% also used for PDF metadata (hyperref)
+\newcommand{\mysubject}{Master Thesis}  %% also used for PDF metadata (hyperref)
+\newcommand{\mytitle}{Entwicklung einer auf Web-Standards basierenden Multiplayer-Online-Plattform für emulierte $($S$)$NES-Konsolenspiele}
+
+\usepackage{xargs}
+\usepackage[colorinlistoftodos,prependcaption]{todonotes}
+\newcommandx{\unsure}[2][1=]{ }
+\newcommandx{\change}[2][1=]{\todo[linecolor=blue,backgroundcolor=blue!25,bordercolor=blue,#1]{#2}}
+\newcommandx{\info}[2][1=]{\todo[linecolor=OliveGreen,backgroundcolor=OliveGreen!25,bordercolor=OliveGreen,#1]{#2}}
+\newcommandx{\improvement}[2][1=]{\todo[linecolor=Plum,backgroundcolor=Plum!25,bordercolor=Plum,#1]{#2}}
+\newcommandx{\thiswillnotshow}[2][1=]{\todo[disable,#1]{#2}}
+
+\definecolor{DispositionColor}{RGB}{\mydispositioncolor} %% used for links and so forth in screen-version
+\definecolor{DispositionColor2}{RGB}{\secondcolor}
+\definecolor{ChapterNumber}{RGB}{192, 214, 223}
+%{187, 203, 203}
+%\definecolor{textcolor}{cmyk}{0.77, 0.71, 0.66, 0.25}
+%\definecolor{textcolor}{RGB}{19, 49, 92}
+\definecolor{textcolor}{RGB}{13, 31, 45}
+\definecolor{grey}{RGB}{237,235,236}
+\definecolor{grey2}{cmyk}{0.17, 0.12, 0.10, 0.00}
+\definecolor{madang}{cmyk}{.20, 0, .34, 0}
+\definecolor{grey3}{gray}{0.8}
+\color{textcolor}
+\addtokomafont{disposition}{\color{DispositionColor}}
+\addtokomafont{caption}{\color{DispositionColor}\footnotesize}
+\addtokomafont{captionlabel}{\color{DispositionColor}}
+
+% https://tex.stackexchange.com/questions/20246/sectioning-bibliography-by-type-of-referred-item
+\PassOptionsToPackage{%
+    abbreviate=true, % (true, false)
+    defernumbers=true, %
+    backend=biber,
+    backref=true,
+    backrefsetstyle=setonly,
+    backrefstyle=three, % (none, three, two, two+, three+, all+)
+    %dashed=false,
+    hyperref=true,
+    indexing=false,
+    language=auto,
+    maxbibnames=10, % default: 3, et al.
+    natbib=true,
+    punctfont=false, %
+    refsection=none, % (part, chapter, section, subsection)
+    refsegment=none, % (none, part, chapter, section, subsection)
+    sorting=nyt,
+    % https://www.sharelatex.com/learn/Biblatex_bibliography_styles
+    style=authortitle, %  numeric-comp, % authortitle, numeric-comp
+}{biblatex}
+    \usepackage{biblatex}
+\addbibresource{Masterarbeit.bib}
+
+% FIXME: Add every entry from bib file, just to see them in the pdf.
+\nocite{*}
+
+\usepackage[
+    bookmarks=false,
+    bookmarksopen=false,
+    %pagebackref=true,
+    pdfpagemode=UseNone, % UseNone, UseOutlines, UseThumbs, FullScreen
+    plainpages=false,
+    unicode=true,
+    % colors: https://secure.wikimedia.org/wikibooks/en/wiki/LaTeX/Colors
+    urlcolor=DispositionColor,
+    linkcolor=DispositionColor,
+    citecolor=DispositionColor,
+    anchorcolor=DispositionColor,
+    colorlinks=\mycolorlinks,
+]{hyperref}
+
+\AtEveryCitekey{%<- This % is needed
+\ifciteseen{}{\defcounter{maxnames}{6}\clearfield{namehash}}}
+
+%% all strings need to be loaded after hyperref was loaded with unicode support
+%% if not the field is garbled in the output for characters like ČŽĆŠĐ
+\hypersetup{
+    pdftitle={\mytitle}, %
+    pdfauthor={\myauthor}, %
+    pdfsubject={\mysubject}, %
+    %pdfcreator={Accomplished with: pdfLaTeX, biber, and hyperref-package. No animals, MS-EULA or BSA-rules were harmed.},
+    pdfproducer={\myauthor},
+}
+
+\setkomafont{section}{\LARGE}
+\setkomafont{subsection}{\Large}
+\setkomafont{subsubsection}{\large}
+\setkomafont{paragraph}{\large}
+\setkomafont{subparagraph}{\large}
+
+% http://ctan.math.utah.edu/ctan/tex-archive/macros/latex/contrib/koma-script/doc/tocstyle.pdf
+% http://mirror.utexas.edu/ctan/macros/latex/contrib/tocloft/tocloft.pdf
+\usepackage{tocstyle}
+\usetocstyle{allwithdot}
+
+\usepackage{pgfplots}
+
+% Comment-Column
+%\usepackage{scrlayer-notecolumn}
+% marginpar
+% marginline
+% https://tex.stackexchange.com/questions/232629/first-paragraph-indented-after-section-title-in-margin
+
+
+% https://mirror.hmc.edu/ctan/macros/latex/contrib/tcolorbox/tcolorbox.pdf
+\usepackage{tcolorbox}
+
+% https://en.wikibooks.org/wiki/LaTeX/Text_Formatting#Hyphenation
+% Usage: Super\hyp{}Man
+\usepackage{hyphenat}
+\usepackage[bottom]{footmisc}
+\usepackage{enumitem}
+\newcommand\litem[1]{\item{\bfseries #1,\\}}
+
+\setlist{noitemsep}   %% kills the space between items
+
+% Typography
+\usepackage[
+    activate={true,nocompatibility},
+    factor=1100,
+    final,
+    kerning=true,
+    spacing=true,
+    tracking=true,
+    shrink=10,
+    stretch=10,
+]{microtype}
+\frenchspacing
+
+\usepackage[xindy]{imakeidx}
+\makeindex
+
+\usepackage[shortcuts]{extdash}
+\renewcommand*\chapterheadstartvskip{\vspace*{.3\textheight}}
+\renewcommand*\chapterheadendvskip{\vspace*{.1\textheight}}
+\renewcommand*{\chapterformat}{%
+  \parbox{\textwidth}{\hfill\chapappifchapterprefix{\ }\thechapter\autodot\enskip}}
+\addtokomafont{disposition}{\normalfont\bfseries}
+\addtokomafont{chapterprefix}{\fontsize{120}{20}\color{ChapterNumber}\mdseries\scshape}
+
+% Head & Foot
+%\usepackage[automark]{scrlayer-scrpage}
+%\ihead{Peter Musterheinzel}
+%\ohead{Seitenstile mit \KOMAScript}
+%\ifoot*{Verlag Naseblau, Irgendwo}
+%\pagestyle{scrheadings}
+%\setkomafont{pageheadfoot}{\small}
+%\setkomafont{pagehead}{\bfseries}
+%\pagestyle{scrheadings}
+\pagestyle{headings}
+
+% Chapters
+\AtBeginDocument{\renewcommand{\partname}{}} % "Kapitel 1" -> "1"
+\renewcommand{\partformat}{}
+\addtokomafont{part}{\fontsize{65}{55}\selectfont}
+\AtBeginDocument{\renewcommand{\chaptername}{}} % "Kapitel 1" -> "1"
+\renewcommand*{\raggedchapter}{\raggedleft} % Align right
+\addtokomafont{chapter}{\fontsize{45}{35}\selectfont}
+
+\usepackage{textcomp} % fix warning with missing font shapes
+\usepackage{scrhack} % fix warnings when using KOMA with listings package
+\usepackage{xspace} % to get the spacing after macros right
+\usepackage{mparhack} % get marginpar right
+\usepackage[latest]{latexrelease} % will be used once available in more distributions (ISSUE #107)
+
+% https://github.com/novoid/LaTeX-KOMA-template
+\usepackage{eso-pic}
+% \unit[42]{m}
+% \unitfrac[100]{km}{h}
+\usepackage{units}
+
+\newcommand{\myfig}[5]{
+%% example:
+% \myfig{}%% filename in figures folder
+%       {width=0.5\textwidth,height=0.5\textheight}%% maximum width/height, aspect ratio will be kept
+%       {}%% caption
+%       {}%% optional (short) caption for list of figures
+%       {}%% label
+\begin{figure}%[htp]
+  \centering
+  \includegraphics[keepaspectratio,#2]{#1}
+  \caption[#4]{#3}
+  \label{#5} %% NOTE: always label *after* caption!
+\end{figure}
+}
+
+\usepackage{tabularx} % better tables
+    \setlength{\extrarowheight}{3pt} % increase table row height
+\newcommand{\tableheadline}[1]{\multicolumn{1}{c}{\spacedlowsmallcaps{#1}}}
+\newcommand{\myfloatalign}{\centering} % to be used with each float for alignment
+\usepackage{caption}
+\captionsetup{font=small}
+\usepackage{subfig}
+
+% Text: Align left
+%\usepackage[document]{ragged2e}
+
+\pdfcompresslevel=9
+\pdfadjustspacing=1
+
+\PassOptionsToPackage{pdftex}{graphicx}
+    \usepackage{graphicx}
+
+% Serif
+\usepackage[sc]{mathpazo} % Palatino with small caps [sc] and old style figures [osf]
+
+%\overfullrule=2cm
+
+% Sans-Serif
+%\usepackage[sfdefault]{FiraSans}
+\usepackage{FiraSans}
+
+\usepackage{setspace}
+%\singlespacing
+\onehalfspacing
+%\doublespacing
+%\setstretch{1.1}
+
+\usepackage{blindtext}
+
+\usepackage[babel=true,strict=true,english=american,german=guillemets]{csquotes}
+%\usepackage[titletoc,toc,page]{appendix}
+%\renewcommand{\appendixtocname}{Anhang}
+%\renewcommand{\appendixpagename}{Anhang}
+\usepackage{pdflscape}
+\usepackage{pdfpages}
+
+\newcounter{dummy} % necessary for correct hyperlinks (to index, bib, etc.)
+\newlength{\abcd} % for ab..z string length calculation
+
+\input{Glossar.tex}
+
+\usepackage{listings}
+\usepackage{soul}
+\usepackage{url}
+\usepackage[all]{hypcap}
+
+
+\setcounter{tocdepth}{1}
+\setcounter{secnumdepth}{4}
+
+\lstset{
+language=Python,                  % choose the language of the code
+basicstyle=\footnotesize,       % the size of the fonts that are used for the code
+numbers=left,                  % where to put the line-numbers
+%numberstyle=\footnotesize,      % the size of the fonts that are used for the line-numbers
+stepnumber=2,                   % the step between two line-numbers. If it's 1 each line will be numbered
+numbersep=5pt,                  % how far the line-numbers are from the code
+backgroundcolor=\color{grey},   % choose the background color. You must add \usepackage{color}
+showspaces=false,               % show spaces adding particular underscores
+showstringspaces=false,         % underline spaces within strings
+showtabs=false,                 % show tabs within strings adding particular underscores
+%frame=single,                  % adds a frame around the code
+tabsize=4,                      % sets default tabsize to 2 spaces
+captionpos=b,                   % sets the caption-position to bottom
+breaklines=true,                % sets automatic line breaking
+breakatwhitespace=false,        % sets if automatic breaks should only happen at whitespace
+title=\lstname,                 % show the filename of files included with \lstinputlisting; also try caption instead of title
+escapeinside={\%*}{*)},         % if you want to add a comment within your code
+%%morekeywords={*,...}          % if you want to add more keywords to the set
+literate=%
+    {€}{\euro}1%
+    {§}{\S}1%
+    %{°}{\textdegree{}}1%
+    {ä}{{\"a}}1%
+    {ö}{{\"o}}1%
+    {ü}{{\"u}}1%
+    {ß}{{\ss}}1%
+    {Ä}{{\"A}}1%
+    {Ö}{{\"O}}1%
+    {Ü}{{\"U}}1%
+    %{µ}{\textmu}1%
+    %{¹}{{\textsuperscript{1}}}1%
+    %{²}{{\textsuperscript{2}}}1%
+    %{³}{{\textsuperscript{3}}}1%
+    %{¼}{\textonequarter}1%
+    %{½}{\textonehalf}1%
+    %{¢}{\textcent}1%
+}
+
+\renewcommand*\listfigurename{List of figures}
+
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+
+% Bullets all the way down...
+\renewcommand{\labelitemi}{$\bullet$}
+\renewcommand{\labelitemii}{$\bullet$}
+\renewcommand{\labelitemiii}{$\bullet$}
+\renewcommand{\labelitemiv}{$\bullet$}
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+\begin{document}
+\frontmatter
+
+%\listoftodos[TODO]
+
+%\begin{abstract}
+% \end{abstract}
+
+\dedication{%
+              Meinem Schnuckelchen\\
+              in ewiger Liebe\\
+              von Deinem Hasenboppelchen.}
+
+\begin{titlepage}
+\vspace*{\fill}
+\begin{center}
+\LARGE
+Masterarbeit\\
+\Large
+\textbf{\mytitle}\\[1cm]
+\large
+\myauthor{}\\
+798797\\[1cm]
+Beuth Hochschule für Technik Berlin\\
+Fachbereich VI -- Informatik und Medien
+\vfill
+\vfill
+Berlin, \today
+\normalsize
+\vfill
+\vfill
+\begin{tabular}{rl}
+Betreuung: & Herr Dipl.-Inform. Hans-Georg Reimer (LB)\\
+Begutachtung: & Herr Prof. Dr. Hildebrand
+\end{tabular}
+\end{center}
+\vspace*{\fill}
+\end{titlepage}
+
+\tableofcontents
+\cleardoublepage
+
+\mainmatter
+
+\include{Kapitel/01-Einleitung.md}
+\include{Kapitel/02-Grundlagen.md}
+\include{Kapitel/03-Zieldefinition.md}
+\include{Kapitel/04-Herausforderungen.md}
+\include{Kapitel/05-Loesungsansaetze.md}
+\include{Kapitel/06-Methodik.md}
+\include{Kapitel/07-Konzept.md}
+\include{Kapitel/08-Implementierung.md}
+\include{Kapitel/09-Evaluation.md}
+\include{Kapitel/10-Fazit.md}
+
+\backmatter
+
+%\addtocontents{toc}{\bigskip\bigskip}
+\addtocontents{toc}{\newpage}
+
+\part{Verzeichnisse} % Listen?
+
+\cleardoublepage
+\listoffigures
+
+\printbibheading[heading=bibnumbered,title={Literatur}]
+\printbibliography[heading=subbibliography,title={Print},type=book]
+\printbibliography[heading=subbibliography,title={Web},type=online]
+
+\printindex
+
+\glsaddall % Also includes un-used items.
+\printglossary[type=main,title=Glossar,toctitle=Glossar]
+\printglossary[type=\acronymtype,title=Akronyme,toctitle=Akronyme]
+
+\backmatter
+\include{Anhang}
+
+\end{document}

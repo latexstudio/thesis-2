@@ -1,0 +1,109 @@
+\chapter{Grundlagen}\label{grundlagen}
+
+Inhalt dieses Kapitels ist eine Einführung in die technischen Grundlagen
+dieser Arbeit. Es werden die wichtigsten Aspekte und Technologien
+erläutert und für das Lösungsumfeld essentielle Begriffe erklärt. Die
+Erläuterungen schaffen ein Grundverständnis für die in den nachfolgenden
+Kapiteln behandelten Aspekte und sind für eine Beurteilung der
+entwickelten Lösung notwendig. Schwerpunkte sind für die Zielsetzung
+potentiell geeignete Web-Technologien, Emulatoren \& ROMs und
+Grundlagenthemen zur Kommunikation in Computer-Netzwerken.
+
+\newpage
+
+\section{Emulation von
+Konsolenspielen}\label{emulation-von-konsolenspielen}
+
+Wie eingangs erwähnt, sind zum Spielen von \gls{snes}-Spielen am
+Computer zwei Dinge notwendig: Ein Emulationsprogramm --- auch
+\gls{emulator} genannt --- und das jeweilige Konsolenspiel, das
+ausgeführt werden soll. Das Spiel liegt dabei in Form einer Datei vor.
+Sie beinhaltet die exakt gleichen Daten, die sich für gewöhnlich auf den
+Modulen befinden, die zum Spielen in die Konsolen gesteckt werden
+müssen. Zum Kopieren der Daten existieren spezielle Geräte, mit denen
+eine solche Datei erzeugt werden kann. Dabei wird ein genaues Abbild des
+Moduls erzeugt, inklusive der Sektoren und der jeweiligen
+Dateisystem-Struktur. Die Dateien werden oft als ROMs bezeichnet, da die
+Daten des Spiels innerhalb des Moduls in einem ROM-Chip gespeichert
+sind. Um ein Spiel auszuführen zu können, muss die Spiel-Datei in den
+Emulator geladen werden.
+
+Der Emulator ist ein Software-Programm, das es ermöglicht Konsolentitel
+auf einem Computer auszuführen. Dies funktioniert, in dem die Hardware
+der jeweiligen Konsole nachgeahmt wird. Die verschiedenen Komponenten
+der Konsole (CPU, Soundchip, etc.) sind dabei so in Software
+implementiert dass sie sich möglichst so verhalten, wie die
+nachzuahmende Hardware. Erst eine möglichst exakte Emulation der
+ursprünglichen Laufzeitumgebung ermöglicht die Ausführung von
+unveränderten Spielen in Form von ROM-Dateien. Die Spiele, bzw. das
+Abbild der Software, ist eine exakte Kopie des Originals.
+
+\begin{itemize}
+\tightlist
+\item
+  Roms
+\item
+  Emulatoren
+\end{itemize}
+
+\section{Der Multiplayer-Modus}\label{der-multiplayer-modus}
+
+Das erste entwickete Computerspiel war ein Multiplayer-Spiel und
+benötigte damit mindestens zwei Spieler, die gemeinsam an einem Gerät
+spielen. Die Verarbeitung der Benutzereingaben erfolgt zentral an dem
+einzigen Gerät, so wie auch die Darstellung der grafischen Oberfläche.
+
+\section{Grundbegriffe der
+Netzwerk-Kommunikation}\label{grundbegriffe-der-netzwerk-kommunikation}
+
+\subsection{Latenz}\label{latenz}
+
+\begin{itemize}
+\tightlist
+\item
+  Minimalste Latenz essentiell beim Spielen
+\item
+  Alles über \unit[N]{ms} ist nicht gut genug. Um angepeilten
+  Maximalwert zu erreichen, System entsprechend konstruieren und
+  Technologien wählen, die eine hinreichende Lösung erst möglich machen.
+\item
+  Wo von hängt Latenz ab? Was kann man da überhaupt machen?
+\item
+  RTT, TCP vs.~UDP?
+\end{itemize}
+
+\subsection{RTT}\label{rtt}
+
+\subsection{Realtime}\label{realtime}
+
+\section{Das Realtime-Web}\label{das-realtime-web}
+
+Vergleich zur alten Herangehensweise. Frontend viel Logik, Backends
+eigentlich nur noch API.
+
+\subsection{Websockets}\label{websockets}
+
+\subsection{HTTP/2}\label{http2}
+
+\subsection{SSE}\label{sse}
+
+\subsection{WebRTC}\label{webrtc}
+
+Hier nur beschreiben. Hier kann ich letztlich auch nur raten, dass die
+gewählten Technologien sinnvoll sein werden. Ob die getroffene Auswahl
+gut war (wurden Ziele erreicht?), zeichnet sich ggf. schon während der
+Implementierung ab. Ergebnisse und Erkenntnisse, die die Bildung eines
+ersten Urteils ermöglichen, werden erst in der Evaluationsphase
+geschaffen.
+
+NICHT:
+
+\begin{itemize}
+\tightlist
+\item
+  Vergleichen/Abwägen
+\item
+  Entscheiden
+\item
+  Begründen
+\end{itemize}

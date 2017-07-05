@@ -1,0 +1,33 @@
+% http://mirrors.ibiblio.org/CTAN/macros/latex/contrib/glossaries/glossariesbegin.pdf
+% http://mirrors.ibiblio.org/CTAN/macros/latex/contrib/glossaries/glossaries-user.pdf
+
+\usepackage[
+    acronym,
+    %nomain,
+    nonumberlist,
+    nopostdot,
+    shortcuts,
+    smallcaps,
+    toc,
+    xindy,
+]{glossaries}
+
+\makeglossaries
+
+% Usage: \gls{foo} -> Will automatically place long version first once, then short.
+% Uses Small caps.
+\setacronymstyle{long-sc-short}
+\setglossarystyle{list}
+
+\newacronym{http}{Http}{Hyper Text Transfer Protocol}
+\newacronym{mpeg-1}{Mpeg-1}{Moving Picture Experts Group Phase 1}
+\newacronym{nat}{Nat}{Network Address Translation}
+\newacronym{www}{Www}{World Wide Web}
+\newacronym{nes}{Nes}{Nintendo Entertainment System}
+\newacronym{snes}{Snes}{Super Nintendo Entertainment System}
+\newacronym{rom}{Rom}{Read-Only Memory}
+\newacronym{gui}{Gui}{Graphical User Interface}
+
+\newglossaryentry{django}{name={Django},description={Web-Framework für die Programmiersprache Python}}
+\newglossaryentry{emulator}{name={Emulator},description={Computer-Programm zur Emulation von Konsolenspielen}}
+\newglossaryentry{host}{name={Host},description={Dienstanbietender Teilnehmer in einem Computer-Netwerk}}

@@ -1,0 +1,73 @@
+\chapter{Lösungsansätze}\label{luxf6sungsansuxe4tze}
+
+\blindtext[1]
+
+\section{Vorhandene Teillösungen}\label{vorhandene-teilluxf6sungen}
+
+\subsection{melody-jsnes}\label{melody-jsnes}
+
+\blindtext[1]
+
+\subsection{webtendo}\label{webtendo}
+
+\blindtext[1]
+
+\subsection{retroarch-web}\label{retroarch-web}
+
+\begin{itemize}
+\tightlist
+\item
+  Zu kompliziert, snes9x nur ein Emulator unter vielen
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Nicht benutzerfreundlich
+  \end{itemize}
+\item
+  Reagiert nicht auf Touch-Events
+\end{itemize}
+
+\blindtext[1]
+
+\section{Lösungsansatz 1:
+Game-Server}\label{luxf6sungsansatz-1-game-server}
+
+Definition list
+
+Is something people use sometimes.
+
+Markdown in HTML
+
+Does \emph{not} work \textbf{very} well. Use HTML tags.
+
+\begin{description}
+    \item [Pro] Client-Seite sehr einfach und portabel (jsmpeg spielt den mpeg-ts stream [mpeg1/mp2] ab und fertig).
+    \item [Pro] Super Browser-Unterstützung. Habe keinen Browser gefunden, der den Stream nicht abgespielt hat.
+    \item [Contra]  Minimaler Prototyp (mit statischem Video) hat nur funktioniert, in dem Audio und Video getrennt kodiert und zum jsmpeg-Websocket-Relay geschickt wurde.
+\item [Contra] Der Quellcode des Emulator(frontend)s müsste angepasst und erweitert werden:
+    \item [Contra] retroarch-ffmpeg unterstützt Live-Streaming und es sind auch verschiedenste Optionen konfigurierbar. Problem: mpeg1/mp2 wird nicht unterstützt, zumindest habe ich keine funktionierende Konfiguration gefunden. Für die Unterstützung von mpeg1/mp2 müsste also der retroarch-ffmpeg-core angepasst werden (viel C, wenig Kommentare). Ist prinzipiell machbar, aber nicht mit meiner C-Expertise, und nicht innerhalb des gegebenen Zeitrahmens.
+    \item [Contra] Auch schwierig: Die Inputs müssten von den Clients an retroarch geschickt werden. Hier müsste wieder das Emulator-Frontend (retroarch) angepasst werden, C/C++. Man hätte wahrscheinlich einen Websocket-Server bauen können, der dann Nachrichten mit Payload=Controller\-/Input enthält und diese Nachrichten dann auf retroarch\-/Controller\-/Eingaben mappt und an das Emulator\-/Frontend weitergibt.
+    \item [Contra] ffmpeg, libav, Encodings, (spezielles) Muxing, \mbox{A/V\-/Sync}, Doku jeweils katastrophal
+\end{description}
+
+Noch zu testen: Paralleles Encoden von Audio/Video mit retroarch-ffmpeg.
+Das war für jsmpeg sowieso nötig.
+
+\section{Lösungsansatz 2: Emulation im
+Browser}\label{luxf6sungsansatz-2-emulation-im-browser}
+
+\begin{itemize}
+\tightlist
+\item
+  Warum sind die Smartphones mit dem ``eigenen Bildschirm'' verbunden,
+  und nicht mit dem Host-PC?
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Minimierung des lokalen Input-Lags zwischen Anzeige und Steuerung
+  \end{itemize}
+\end{itemize}
+
+Tamarys WebRTC-Plugin
