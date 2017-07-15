@@ -29,9 +29,9 @@ log = logging.getLogger(__name__)
 
 def main():
     folders = (
-        '/Users/kai/Sync/Master/mes.wiki',
+        '/Users/kai/Sync/Master/wiki',
         '/Users/kai/Sync/Master/thesis',
-        '/Users/kai/Library/Mobile Documents/27N4MQEA55~pro~writer/Documents/mes.wiki',
+        '/Users/kai/Library/Mobile Documents/27N4MQEA55~pro~writer/Documents/wiki',
         '/Users/kai/Library/Mobile Documents/27N4MQEA55~pro~writer/Documents/thesis',
     )
 

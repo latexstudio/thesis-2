@@ -12,7 +12,7 @@ from typing import Callable, List, Tuple
 
 
 DIR_CHAPTERS = os.path.join(os.getcwd(), 'Kapitel')
-DOKU_REPO = '../mes.wiki'
+DOKU_REPO = '../wiki'
 DOKU_DIR = os.path.join(DOKU_REPO, 'doku')
 PROGRAMS = (
     ('pandoc', 'pandoc', 'pandoc'),
@@ -23,7 +23,7 @@ PROGRAMS = (
 def main():
     if not os.path.exists(DOKU_REPO):
         print(f'No such file or directory: {DOKU_REPO}')
-        print(f'git clone https://gitlab.com/kaikuehne/mes.wiki {DOKU_REPO}')
+        print(f'git clone https://github.com/kkmsc17/wiki {DOKU_REPO}')
         sys.exit(1)
 
     install_missing_programs(PROGRAMS)
