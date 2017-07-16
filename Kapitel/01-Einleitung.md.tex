@@ -27,14 +27,15 @@ von Sony. Wie auch schon das \gls{nes} unterstützen beide Systeme
 mehrere Spieler, über entsprechende Controller, die mit der Konsole
 gekoppelt werden. Die technologische Entwicklung seit den 80er und 90er
 Jahren ist gut am Internet abzulesen: Damals galt ein 28.8k-Modem als
-Highspeed-Gerät. Heutzutage sind breitbandige Internetanschlüsse
-großflächig verfügbar. Dieser technologische Fortschritt ermöglicht es,
-größere Datenmengen übers Internet zu übertragen -- z. B. Daten eines
-Multiplayer-Spiels. Man spielt nicht mehr exklusiv im eigenen Wohnzimmer
-oder auf einer LAN-Party gemeinsam miteinander, sondern kann dies über
-das Internet und über Landesgrenzen hinweg tun. Dazu haben Microsoft und
-Sony jeweils kostenpflichtige Online-Plattformen geschaffen, über die
-Spieler miteinander über verschiedenste Kanäle interagieren -- und, viel
+Highspeed-Gerät.\todo{Formulierung und Quelle} Heutzutage sind
+breitbandige Internetanschlüsse großflächig verfügbar. Dieser
+technologische Fortschritt ermöglicht es, größere Datenmengen übers
+Internet zu übertragen -- z. B. Daten eines Multiplayer-Spiels. Man
+spielt nicht mehr exklusiv im eigenen Wohnzimmer oder auf einer
+LAN-Party gemeinsam miteinander, sondern kann dies über das Internet und
+über Landesgrenzen hinweg tun. Dazu haben Microsoft und Sony jeweils
+kostenpflichtige Online-Plattformen geschaffen, über die Spieler
+miteinander über verschiedenste Kanäle interagieren -- und, viel
 wichtiger -- miteinander spielen können. Die Plattformen bieten einen
 Treffpunkt der Kommunikation und Vermittlung und stellen für die
 Spiele-Entwickler Dienste wie Spiel-Lobbys und Matchmaking bereit.
@@ -59,10 +60,10 @@ auszuwählen ist nicht einfach: Allein für das \gls{snes} existieren mehr
 als ein Dutzend Emulatoren für verschiedenste Betriebssysteme (vgl.
 \cite{snes-emulator-list}), die sich in der Genauigkeit der Emulation,
 der Kompatibilität und weiteren Aspekten unterschieden und von denen
-partiell zusätzliche Ableger (Forks) existieren (FIXME). Ein Teil der
+partiell zusätzliche Ableger (Forks) existieren\todo{}. Ein Teil der
 Emulatoren verfügt über einen Multiplayer-Modus. Mit dem Problem, dass
-die verschiedenen Emulatoren untereinander meist inkompatibel sind
-(FIXME). Auch bei komplexeren Emulationssystemen wie RetroArch, das
+die verschiedenen Emulatoren untereinander meist inkompatibel
+sind\todo{}. Auch bei komplexeren Emulationssystemen wie RetroArch, das
 viele Emulatoren enthält und um eine eigens geschaffene Netplay-Funktion
 erweitert, ist die Kompatibilität nicht garantiert (vgl.
 \cite{retroarch-netplay-comp}). Um erfolgreich ein \gls{snes}-Spiel im
@@ -72,7 +73,8 @@ verwendeten Emulatoren unteinander kompatibel sind, existieren weitere
 Hürden, die für einen Anwender ohne technischen Hintergrund nicht ohne
 Weiteres zu lösen sind. Ein möglicher Ablauf zum Erstellen eines Spiels:
 
-\begin{itemize}
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
   Einer der Spieler wird als \gls{host} bestimmt und startet den
@@ -80,7 +82,7 @@ Weiteres zu lösen sind. Ein möglicher Ablauf zum Erstellen eines Spiels:
 \item
   Der Host muss dabei sicherstellen, dass der spezifische Port, auf dem
   der Prozess läuft, von allen Mitspielern über das Netzwerk erreichbar
-  ist. Falls der Host-Ssieler sich in einem Netzwerk befindet, dessen
+  ist. Falls der Host-Spieler sich in einem Netzwerk befindet, dessen
   Routing auf \gls{nat} basiert, muss eine Port-Weiterleitung für den
   Emulator-Prozess eingerichtet werden, der auf dem PC des Host-Spielers
   läuft. Dazu muss die verwendete Portnummer des Emulators bekannt und
@@ -99,7 +101,7 @@ Weiteres zu lösen sind. Ein möglicher Ablauf zum Erstellen eines Spiels:
   Die Mitspieler verbinden sich mit dem Host-Spieler über die Eingabe
   der IP-Adresse des Hosts im entsprechenden Dialog der
   Benutzeroberfläche des verwendeten Emulators.
-\end{itemize}
+\end{enumerate}
 
 \section{Zielsetzung}\label{zielsetzung}
 
@@ -154,7 +156,7 @@ sauberen Architektur leicht um neue Funktionen zu erweitern ist.
   aufbauen oder diese erweitern. Gewählten Lösungsansatz vorstellen und
   mögliche Alternativen aufzeigen.
 \item
-  \textbf{Methodik} Beschreibung der Umsetzung.
+  \textbf{Methodik} Beschreibung der geplanten Umsetzung.
 \item
   \textbf{Konzeption} Entwurf der Benutzeroberfläche, Definition der
   System-Komponenten und der Software-Architektur.

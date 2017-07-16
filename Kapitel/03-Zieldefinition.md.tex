@@ -1,72 +1,301 @@
 \chapter{Spezifikation}\label{spezifikation}
 
-Dieses Kapitel beinhaltet die Problembeschreibung und die Motivation,
-die Anstoß zur Bearbeitung dieses Themas war. Der Hauptteil besteht aus
-einer Zieldefinition der zu erstellenden Software. Dies beinhaltet auch
-Aspekte, die ausdrücklich nicht Teil dieser Arbeit sind.
-
-Dieser Abschnitt definiert die zu erfüllenden System-Anforderungen, die
-im späteren Verlauf dieser Arbeit während der Evaluation überprüft
-werden. Zunächst wird definiert, welche Grundfunktionen das System haben
-soll. Weiter gelistet sind die Leistungs- und Qualitätsanforderungen
-sowie die Randbedingungen, innerhalb derer die definierten Anforderungen
-gelten. Abgeschlossen wird das Kapitel durch eine Auflistung von
-Kriterien, die nicht Gegenstand dieser Arbeit sind.
+Dieser Abschnitt definiert die zu erfüllenden System-Anforderungen,
+deren Erreichen im späteren Verlauf dieser Arbeit während der Evaluation
+überprüft werden. Zunächst wird definiert, über welche Grundfunktionen
+das System verfügen soll. Weiter gelistet werden die Leistungs- und
+Qualitätsanforderungen sowie die Randbedingungen, innerhalb derer die
+definierten Anforderungen gelten. Abgeschlossen wird das Kapitel durch
+eine Auflistung der Kriterien, die explizit \emph{nicht} Gegenstand
+dieser Arbeit sind.
 
 \newpage
 
-Das Ziel dieser Masterarbeit ist die Entwicklung einer Online-Plattform,
-die es den Nutzern einfach macht, gemeinsam über das Netzwerk
-miteinander SNES-Spiele zu spielen. Dafür existieren
-Emulations-Programme in Hülle und Fülle. Warum muss man das neu machen?
+\todo{Kurze Einordnung}\todo{Völlig neu? Alt?}\todo{Einfache Lösung? Total schwer?}\todo{Forschung? Anwendung?}
 
-\myfig{Abbildungen/Diagramme/Zieldefinition_0_Controller}
-   {width=0.9\textwidth}
-   {This flower was photographed at my home town in 2010.}
+Die \gls{snes}-Konsole unterstützt grundsätzlich nur \emph{lokalen
+Multiplayer} mit bis zu zwei --- beziehungsweise 4, mit speziellem
+Adapter --- Spielern. Die Eingabe der Befehle erfolgt über mitgelieferte
+Eingabegeräte \gls{controller}, die jeweils über ein Kabel mit der
+Konsole verbunden sind. Über einen Multiplayer-Modus zum Spielen über
+das Internet, wie er von heutigen Konsolen unterstützt wird, verfügt die
+Konsole nicht.
+
+Ursprünglich für diesen Anwendungszweck nicht vorgesehen, wird im Zuge
+der Arbeit ein System entwickelt, das das Spielen von \gls{snes}-Spielen
+über das Internet ermöglicht. Die einzelnen Spieler sind dabei nicht
+über eine Konsole, sondern über einen Webbrowser miteinander verbunden
+(siehe Abbildung \ref{fig:spec_overview_1}). Die Verbindung wird dabei
+über eine Web-Plattform, nachfolgend auch Web-Applikation (kurz
+Web-App), hergestellt und verwaltet.
+
+\myfig{Diagramme/Zieldefinition_0_Controller}
+   {width=0.6\textwidth}
+   {Bla foo bar}
    {Home town flower}
-   {fig:flower}
+   {fig:spec_overview_1}
 
-\myfig{Abbildungen/Diagramme/Zieldefinition_1_Controller}
-   {width=0.9\textwidth}
-   {This flower was photographed at my home town in 2010.}
+Die große Herausforderung dieser Arbeit besteht darin, das \gls{snes} um
+einen neuen Multiplayer-Modus zu erweitern, der das gemeinsame Spielen
+übers Netzwerk überhaupt erst ermöglicht. Bereits bestehende
+Emulations-Programme lösen das Problem in Ansätzen, in der Praxis ist
+deren Verwendung aber unnötig komplex und benötigt neben dem
+eigentlichen Spiel weitere Software und eine spezielle
+Netzwerk-Konfiguration (siehe Abschnitt FIXME).
+
+Um die Grundfunktionen des zu erstellenden Systems zu nutzen, wird außer
+einem aktuellen Desktop-Browser keine weitere Software benötigt. Das
+Spiel wird direkt im Browser ausgeführt, wobei die Steuer-Befehle über
+die jeweils angeschlossene Computer-Tastatur entgegen genommen und
+verarbeitet werden.
+
+Alternativ haben Benutzer die Möglichkeit zur Installation einer nativen
+Mobile-App für iPhones und Android-Geräte, die neben der eigentlichen
+Web-App entwickelt wird. Nach dem Koppeln der beiden Applikationen
+erfolgt die Eingabe-Verarbeitung nicht mehr über die Computer-Tastatur,
+sondern über den in der App angezeigten virtuellen \gls{controller}, der
+einem originalen SNES-Controller nachempfunden ist. Das Prinzip ist in
+Abbildung \ref{fig:spec_overview_2} dargestellt.
+
+\myfig{Diagramme/Zieldefinition_1_Controller}
+   {width=0.6\textwidth}
+   {Nach Kopplung des eigenen Smartphones verwendet Spieler 1 die Controller-App zur Eingabe der Steuer-Befehle.}
    {Home town flower}
-   {fig:flower}
+   {fig:spec_overview_2}
 
-\myfig{Abbildungen/Diagramme/Zieldefinition_2_Controller}
-   {width=0.9\textwidth}
+Neben ihrer Funktion als ``besserer Controller'' schafft die
+Controller-App außerdem die Möglichkeit, dem laufenden Spiel weitere
+(lokale) Spieler hinzuzufügen. Das bedeutet, das pro Browser mehrere
+Spieler vorhanden sein können, die sich einen Bildschirm teilen. Das
+Hinzufügen der lokalen Spieler funktioniert funktioniert dabei so wie
+die Kopplung des Smartphones von Spieler 1 und muss vom Spielleiter
+initiiert werden (siehe Abbildung \ref{fig:spec_overview_3}. Durch diese
+Flexibilität sind verschiedene Spiel-Konfigurationen möglich.
+
+\myfig{Diagramme/Zieldefinition_2_Controller}
+   {width=0.6\textwidth}
    {This flower was photographed at my home town in 2010.}
    {Home town Test}
-   {fig:flower}
+   {fig:spec_overview_3}
+
+\section{Funktionale Anforderungen}\label{funktionale-anforderungen}
+
+Dieser Abschnitt beschreibt die Spezifikation des Soll-Zustands des zu
+erstellenden Systems und seiner Komponenten. Der Soll-Zustand wird
+während der Evaluation überprüft, in dem ein Vergleich zwischen Soll-
+und Ist-Zustand vorgenommen wird.
+
+Das zu entwickelnde System besteht aus den Komponenten \textbf{Web-App}
+und \textbf{Controller-App}, deren Anforderungen nachfolgend aufgelistet
+sind.
+
+\subsection{Web-Applikation}\label{web-applikation}
+
+Die Web-Applikation besteht aus vier verschiedenen Ansichten, die
+untereinander verknüpft und zwischen denen der Benutzer während der
+Nutzung navigiert:
 
 \begin{itemize}
 \tightlist
 \item
-  Völlig neu? Alt?
+  \textbf{Startseite},
 \item
-  Einfache Lösung? Total schwer?
+  \textbf{Authentifikation},
 \item
-  Forschung? Anwendung?
+  \textbf{Lobby},
+\item
+  und \textbf{Match}.
 \end{itemize}
 
-\section{Funktionsumfang}\label{funktionsumfang}
+Abbildung \ref{fig:spec_views_and_flow} gibt einen Überblick über die
+verschiedenen Ansichten und Navigationspfade der Web-Applikation. Die in
+den jeweiligen Ansichten enthaltenen Funktionen werden nachfolgend
+erläutert und bilden zusammen die funktionalen Anforderungen, die an die
+Web-Applikation gestellt werden.
 
-\subsection{Muss-Kriterien}\label{muss-kriterien}
+\myfig{Diagramme/Flow}
+    {width=0.8\textwidth}
+    {Ansichten und Navigationspfade der Web-Applikation.}
+    {Cool}
+    {fig:spec_views_and_flow}
 
-\subsection{Kann-Kriterien}\label{kann-kriterien}
+\subsubsection*{Ansicht 1: Startseite}
 
-\subsection{Abgrenzungskriterien}\label{abgrenzungskriterien}
+Die Startseite ist eine keine wirkliche Ansicht. Die Funktion der
+Startseite ist lediglich die Weiterleitung des Benutzers auf eine
+nachfolgende Ansicht. Ist der Benutzer dem System bekannt, erfolgt eine
+Weiterleitung auf die Lobby-Ansicht. Ist der Benutzer unbekannt, ist
+eine Authentifikation notwendig und der Benutzer wird auf zur
+Authentifikation-Ansicht weitergeleitet.
 
-\section{Bedienung}\label{bedienung}
+\subsubsection*{Ansicht 2: Authentifikation}
 
-\missingfigure{Flow-Diagramm (Sketch)}
+Voraussetzung für die Nutzung der Web-Applikation ist die
+Authentifikation des Benutzers. Dabei wird der Benutzer aufgefordert
+einen eindeutigen Benutzernamen auszuwählen. Die Eingabe erfolgt über
+ein herkömmliches Web-Formular, das die Benutzereingaben validiert und
+sicherstellt, dass ein eindeutiger Name gewählt wird. Nach der
+Verarbeitung des Benutzernamens wird dieser im Browser des Nutzers
+gespeichert und die Web-Applikation wechselt zur Lobby-Ansicht.
 
-\section{Anforderungen an die
-Umgebung}\label{anforderungen-an-die-umgebung}
+\subsubsection*{Ansicht 3: Lobby}
 
-\section{Leistung- \&
+Nach der Authentifikation des Benutzers und dessen Weiterleitung auf die
+Lobby-Ansicht werden dem Benutzer folgende Funktionen zur Verfügung
+gestellt:
+
+\begin{description}
+    \item [Auflisten der aktuellen Matches] Nach der Authentifikation wird der Benutzer auf die Lobby-Ansicht weitergeleitet. Die Lobby ist eine Liste aller Matches, die von anderen Benutzern erstellt worden sind und denen der Benutzer beitreten kann, um an Matches teilzunehmen. Aufgelistet werden nur jene Matches, deren maximale Spielerzahl noch nicht erreicht ist. Die Liste zeigt den aktuellen Stand der Matches in Echtzeit an und wird automatisch aktualisiert, ohne dass das Browser-Fenster neu geladen werden muss.
+    \item [Erstellen (“Hosten”) eines neuen Matches] Der Benutzer muss die Möglichkeit haben, ein neues Match zu erstellen, um entweder allein oder gemeinsam mit anderen Personen zu spielen. Voraussetzung zum Erstellen eines neuen Matches ist die Bereitstellung des Spiels in Form einer \acrshort{rom}-Datei, die vom Benutzer im Verlauf der Spielerstellung über ein Web-Formular hochgeladen werden muss. Neben der \acrshort{rom}-Datei muss ein Titel für das Match vergeben und die maximal gewünschte Spielerzahl festgelegt werden. Unterstützt werden sollen pro Match ein bis maximal vier Spieler. Die ursprünglich für das Spiel vorgesehene maximale Spielerzahl des hochgeladenen Spiels wird nicht ermittelt. Es liegt im Ermessen des Benutzers eine für das jeweilige Spiel sinnvolle\footnote{Zum Beispiel zwei für “Street Fighter 2” und vier für “Super Bomberman”.} maximale Spielerzahl festzulegen. Solange das Match existiert und der Benutzer das Spiel durch Schließen des Browser-Fensters nicht verlässt, hat er die Rolle des Spielleiters. Als solches stehen ihm für das erstellte Match mehr Funktionen zur Verfügung als den Benutzern, die dem Spiel als Mitspieler beitreten. Die Beschreibung der Funktionen befindet sich in Abschnitt \nameref{sec:view-match}.
+    \item [Match beitreten] Der Benutzer soll einem bestehenden Match beitreten können, um daran teilzunehmen. Vor dem Beitreten werden keine Informationen abgefragt, das jeweilige Match muss nur ausgewählt werden. Grundsätzlich können alle Benutzer jedem gelisteten Match beitreten. Liegt die vom Spielleiter konfigurierte maximale Spielerzahl über der vom Spiel unterstützten, betritt der Benutzer das Match im Zuschauer-Modus und kann nicht ins Spielgeschehen eingreifen. Vor dem Betreten wird dem Benutzer nicht angezeigt, in welchem Modus (als Mitspieler oder als Zuschauer) das Match betreten wird.
+\end{description}
+\subsubsection*{Ansicht 3: Match}\label{sec:view-match}
+
+Die Match-Ansicht setzt sich aus mehreren Bereichen zusammen, über die
+unterschiedliche Funktionen zugänglich gemacht werden.
+
+Die \textbf{Leinwand} ist der prominente Bereich der Ansicht, in dem das
+laufende Spiel dargestelllt wird.
+
+\begin{description}
+    \item [Spiel anhalten, pauseren und neustarten] Der Spielleiter kann das Spiel über Schaltflächen starten, pausieren und neustarten.
+    \item [Spielen im Vollbildmodus] Jeder Mitspieler hat hier die Option, die Leinwand über eine Schaltfläche in den Vollbildmodus umzuschalten. Der Vollbildmodus kann über die ESC-Taste verlassen werden.
+\end{description}
+
+Die \textbf{Spielerliste} listet alle im Match befindlichen Benutzer
+auf. Die Liste wird stets aktualisiert und zeigt jedem Benutzer in
+Echtzeit die aktuellen Mitspieler an.
+
+\begin{description}
+    \item [Entfernen eines Spielers aus einem Match] Der Spielleiter kann beliebige Spieler über eine Schaltfläche aus dem Match entfernen (“kicken”). Nach dem Entfernen wird der Benutzer auf die Lobby-Ansicht weitergeleitet. Eine Sperrzeit ist nicht vorgesehen. Der Spieler kann dem Match theoretisch erneut beitreten.
+\end{description}
+
+Den letzten Bereich der Match-Ansicht bildet der \textbf{Chat},
+bestehend aus dem Chat-Verlauf und einem Formular zum Senden einer neuen
+Chat-Nachricht. Der Chat-Verlauf wird nicht persistiert: Jedem Benutzer
+werden nur diejenigen Nachrichten angezeigt, die nach dem Zeitpunkt
+seines Beitritts zum Match verfasst worden sind.
+
+\begin{description}
+    \item [Match-eigener Chat] Über den Chat-Bereich hat jeder Benutzer die Möglichkeit, Nachrichten mit den Mitspielern aus dem Match auszutauschen. Chat-Nachrichten werden über ein Formularfeld eingegeben und über eine Schaltfläche abgesendet. Der Chat-Verlauf aktualisiert sich in Echtzeit. Alle im Match befindlichen Benutzer (inkl. Zuschauer) können am Chat teilnehmen und bekommen alle Nachrichten in Echtzeit angezeigt.
+\end{description}
+
+Wenn ein Benutzer ein Match durch Schließen des Browserfensters oder
+durch die Navigation auf eine andere Seite verlässt, wird die
+Spielerliste bei allen Mitspielern live aktualisiert. Verlässt der
+Spielleiter das Match, wird das Match beendet und alle Mitspieler werden
+auf die Lobby-Ansicht weitergeleitet.
+
+\newpage
+
+\todo{Gehört hier nicht hin}{Voraussetzung für ein netzwerkbasiertes Multiplayer-Spiel ist eine aktive Verbindung zwischen allen Mitspielern eines Spiels.
+Wie diese Verbindung zustande kommt, ist von System zu System unterschiedlich. Bei den meisten Emulatoren ist es notwendig, einen Spieler als Spielleiter zu bestimmen. Das Emulator-Programm dieses Spielers wird dabei im Host-Modus gestartet und bietet einen Netzwerkdienst an, der über das Internet erreichbar sein muss und deren Adresse den Mitspielern mitgeteilt werden muss. Dieses Verfahren hat mehrere Nachteile, die bereits in Kapitel \todo{} erläutert wurden. Eine bessere Lösung, die sich mittlerweile auch durchgesetzt hat, ist das Konzept einer Spiel-Lobby, in dem alle laufenden Spiele aufgelistet sind. Die Lobbys verfügen meist über Such- und Filterfunktionen zum Finden des gesuchten Spiels. Die Lobby ist eine Lösung für das *Matchmaking* und erleichtert das, in dem es die Komplexität des Vorgangs, die im erstgenannten Ansatz vorhanden ist (IP-Adressen, Netzwerk-Konfiguration, Firewalls, etc.), vor den Spielern verbirgt.}
+
+\subsection{Controller-Applikation}\label{controller-applikation}
+
+\todo{}
+
+\subsection{Weitere Anforderungen}\label{weitere-anforderungen}
+
+\todo{Unterstützte Spiele}
+
+\section{Nichtfunktionale
+Anforderungen}\label{nichtfunktionale-anforderungen}
+
+\todo{}
+
+\subsection{Leistung- \&
 Qualitätsanforderungen}\label{leistung--qualituxe4tsanforderungen}
 
-\section{Betriebs- \&
-Nutzungsbedingungen}\label{betriebs--nutzungsbedingungen}
+\todo[inline]{Frames und Latenz} \todo[inline]{im LAN, nicht Internet}
 
-\section{Randbedingungen}\label{randbedingungen}
+\subsection{Anforderungen an die
+Umgebung}\label{anforderungen-an-die-umgebung}
+
+Alle definierten Anforderungen gelten nur im Kontext der hier
+beschriebenen Umgebung --- die Lauffähigkeit des entwickelten Systems
+ist ebenfalls nur dann gegeben.
+
+\subsubsection{Nutzungsbedingungen}\label{nutzungsbedingungen}
+
+Grundsätzlich unterstützt das System alle modernen Desktop-Browser, die
+folgende Standards vollständig und fehlerfrei unterstützen:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  JavaScript
+\item
+  \gls{canvas}-Element
+\item
+  WebGL
+\item
+  WebRTC (inkl. RTCPeerConnection, MediaCapture)
+\item
+  WebAssembly
+\item
+  WebAudio
+\item
+  WebSockets
+\end{enumerate}
+
+\todo{Glossar-Links}
+
+Installierte
+Browser-Erweiterungen\footnote{Zum Beispiel \glqq{}uBlock Origin Extra\grqq{}, das diverse WebRTC-Funktionen deaktiviert.},
+die die o.g. Technologien blockieren, deaktvieren oder die
+Funktionsweise einschränken, müssen deaktiviert sein. Theoretisch
+erfüllt und deswegen angestrebt ist eine Unterstützung der
+Desktop-Varianten der Web-Browser Google Chrome und Mozilla Firefox
+\todo{warum erfüllen die beiden das? Kompatibilitätsmatrizen, iswebrtcreadyyet}
+--- unter den genannten Voraussetzungen. Die Browser verfügen meist über
+unterschiedliche Implementationen der genannten Standards, wobei es
+große Unterschiede bzgl. Funktionsumfang und Korrektheit geben kann.
+Eine qualitativ gleichwertige Kompatiblität für mehrere Browser zu
+schaffen ist kein triviales Problem, zu dessen Lösung innerhalb dieser
+Arbeit keine Zeit zur Verfügung steht. Im Zuge der Umsetzung wird ein
+Prototyp implementiert, der es möglich macht, sich einen ersten Eindruck
+zur Kompatibilität zu verschaffen. Das System wird anschließend auf
+diejenigen Web-Browser hin optimiert, die bei einem manuellen Vergleich
+die höchste Kompatibilität haben und die Software standardkonform
+ausführen.
+
+Mobile Web-Browser (wie z. B. \glqq{}Mobile Safari\grqq{}) werden
+grundsätzlich nicht unterstützt, da die entsprechenden Standards noch
+nicht implementiert und integriert worden sind\todo{Datum?}.
+
+\subsubsection{Betriebsbedingungen}\label{betriebsbedingungen}
+
+Das entwickelte System ist eine komplette Web-Anwendung (\glqq{}Full
+Stack\grqq{}) und benötigt neben verschiedenen Software-Bibliotheken
+keine weiteren Module, die außerhalb des Kontextes dieser Arbeit
+entstanden
+sind\todo{Meine eigenen, evtl. vorher entwickelten. Third-Party natürlich.}.
+Das Aufbauen auf bestehenden Teillösungen wird angestrebt und die
+Integration derer dokumentiert. Voraussetzung für den Betrieb ist ein
+Linux-Betriebssystem mit Unterstützung für \gls{docker}. Alle benötigten
+Software-Pakete werden automatisch innerhalb der Docker-Umgebung
+installiert und konfiguriert.
+
+Das System ist nicht auf maximale Skalierbarkeit hin optimiert, weil
+dies außerhalb des Kontextes dieser Arbeit liegt. Anfragen kleinerer
+Benutzergruppen von 10-20
+\todo{Nach Evaluation mit tatsächlicher Zahl ersetzen}gleichzeitigen
+Nutzern, die gegebenenfalls während einer Testphase verarbeitet werden
+müssen, sollen sich nicht negativ auf die beschriebene Qualität
+auswirken.
+
+\subsection{Randbedingungen \&
+Abgrenzungskriterien}\label{randbedingungen-abgrenzungskriterien}
+
+\begin{itemize}
+\tightlist
+\item
+  Keine Benutzerkonten.
+\item
+  Keine Lag-Kompensation.
+\item
+  Eine Optimierung der \gls{accessibility} der Web-Applikation ist aus
+  Zeitgründen nicht möglich.
+\end{itemize}
