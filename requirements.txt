@@ -1,4 +1,8 @@
+PyYAML==3.12
 argh==0.26.2
 pathtools==0.1.2
-PyYAML==3.12
+pync==1.6.1
+python-dateutil==2.6.1
+six==1.10.0
 watchdog==0.8.3
+
