@@ -1,3 +1,39 @@
-\chapter{Herausforderungen}\label{herausforderungen}
+\chapter{Probleme \&
+Lösungsansätze}\label{probleme-luxf6sungsansuxe4tze}
 
 \blindtext[1]
+
+\section{Web-Applikation in Echtzeit}\label{web-applikation-in-echtzeit}
+
+\begin{itemize}
+\tightlist
+\item
+  Stateless Request/Response-Modell macht aufgrund der Anforderungen
+  keinen Sinn
+\item
+  Man könnte selektiv z.B. AJAX / Long Polling etc. machen. Macht aber
+  wenig Sinn, weil man, wie man später sieht, WebRTC braucht und man
+  dafür einen Signaling Channel bauen muss. Und da bietet sich
+  WebSockets an.
+\end{itemize}
+
+\section{Emulation im Web}\label{emulation-im-web}
+
+\begin{itemize}
+\tightlist
+\item
+  Informationsaustausch zwischen Web-Browser und Emulator
+\end{itemize}
+
+\section{Transport \& Synchronisation der
+Spieldaten}\label{transport-synchronisation-der-spieldaten}
+
+\begin{itemize}
+\tightlist
+\item
+  Server-Client-Modell, wo die Emulation auf einem Game-Server statt
+  findet. Vor/Nachteile
+\end{itemize}
+
+\section{Kommunikation zwischen Browser und
+Controller-App}\label{kommunikation-zwischen-browser-und-controller-app}

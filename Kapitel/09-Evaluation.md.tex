@@ -2,18 +2,80 @@
 
 \blindtext[1]
 
+\newpage
+
+\textbf{Plan:}
+
+Große Fragen:
+
 \begin{itemize}
 \tightlist
 \item
-  Spielbar?
+  Spielbar? User Tests?
+\item
+  Nur im LAN, oder auch übers Internet?
+\item
+  Welche Latenz war angestrebt? Erreicht?
+\end{itemize}
+
+Faktenbasiert, Metriken:
+
+\begin{itemize}
+\tightlist
+\item
+  Emulatior-FPS
 
   \begin{itemize}
   \tightlist
   \item
-    Nur im LAN, oder auch übers Internet?
+    Emulator kann FPS anzeigen
   \item
-    Welche Latenz war angestrebt? Erreicht?
+    Code so anpassen, dass die FPS durch JavaScript über eine API
+    zugänglich sind und diesen Wert auslesen
+  \item
+    Für den Test bietet sich Selenium an
+
+    \begin{itemize}
+    \tightlist
+    \item
+      Automatisiert
+    \item
+      Mehrere Browser, Dienstleister: Saucelabs, BrowserStack
+    \item
+      Schritte:
+
+      \begin{itemize}
+      \tightlist
+      \item
+        Match hosten
+      \item
+        Spiel hochladen
+      \item
+        Über N Zeiteinheiten FPS auslesen (bzgl. Statistik Tipps
+        einholen)
+      \end{itemize}
+    \end{itemize}
   \end{itemize}
+\item
+  Netzwerk-Metriken von WebRTC
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Automatisierung nicht ganz einfach, weil zwei Browser kommunizieren
+    müssten. Unbekannt, ob Selenium das kann (also ein ``Pair spawnen'',
+    oder sowas)
+  \item
+    Auslesen ist über das Control-Protokoll sehr gut machbar. Alle
+    WebRTC-fähigen Browser haben dafür meist eine eigene Ansicht, auf
+    der Debug-Informationen bzgl. WebRTC angezeigt werden
+  \end{itemize}
+\end{itemize}
+
+\textbf{Weitere Ideen:}
+
+\begin{itemize}
+\tightlist
 \item
   WebRTC vs.~WebSockets
 
