@@ -14,9 +14,9 @@ dieser Arbeit sind.
 \todo{Kurze Einordnung}\todo{Völlig neu? Alt?}\todo{Einfache Lösung? Total schwer?}\todo{Forschung? Anwendung?}
 
 Die \gls{snes}-Konsole unterstützt grundsätzlich nur \emph{lokalen
-Multiplayer} mit bis zu zwei --- beziehungsweise 4, mit speziellem
-Adapter --- Spielern. Die Eingabe der Befehle erfolgt über mitgelieferte
-Eingabegeräte \gls{controller}, die jeweils über ein Kabel mit der
+Multiplayer} mit bis zu zwei --- mit mit speziellem Adapter vier ---
+Spielern. Die Eingabe der Befehle erfolgt über mitgelieferte
+Eingabegeräte (\gls{controller}), die jeweils über ein Kabel mit der
 Konsole verbunden sind. Über einen Multiplayer-Modus zum Spielen über
 das Internet, wie er von heutigen Konsolen unterstützt wird, verfügt die
 Konsole nicht.
@@ -24,38 +24,39 @@ Konsole nicht.
 Ursprünglich für diesen Anwendungszweck nicht vorgesehen, wird im Zuge
 der Arbeit ein System entwickelt, das das Spielen von \gls{snes}-Spielen
 über das Internet ermöglicht. Die einzelnen Spieler sind dabei nicht
-über eine Konsole, sondern über einen Webbrowser miteinander verbunden
+über eine Konsole, sondern über einen Web-Browser miteinander verbunden
 (siehe Abbildung \ref{fig:spec_overview_1}). Die Verbindung wird dabei
 über eine Web-Plattform, nachfolgend auch Web-Applikation (kurz
-Web-App), hergestellt und verwaltet.
+Web-App), initiiert und verwaltet.
 
 \myfig{Diagramme/Zieldefinition_0_Controller}
    {width=0.6\textwidth}
-   {Bla foo bar.}
+   {Zum Spielen ist ausschließlich ein Web-Browser notwendig.}
    {Home town flower}
    {fig:spec_overview_1}
 
-Die große Herausforderung dieser Arbeit besteht darin, das \gls{snes} um
-einen neuen Multiplayer-Modus zu erweitern, der das gemeinsame Spielen
-übers Netzwerk überhaupt erst ermöglicht. Bereits bestehende
-Emulations-Programme lösen das Problem in Ansätzen, in der Praxis ist
-deren Verwendung aber unnötig komplex und benötigt neben dem
+Die große Herausforderung dieser Arbeit besteht darin, das Spielerlebnis
+des \gls{snes} um einen neuen Multiplayer-Modus zu erweitern, der das
+gemeinsame Spielen übers Netzwerk überhaupt erst ermöglicht. Bereits
+bestehende Emulations-Programme lösen das Problem in Ansätzen, in der
+Praxis ist deren Verwendung aber unnötig komplex und benötigt neben dem
 eigentlichen Spiel weitere Software und eine spezielle
 Netzwerk-Konfiguration (siehe Abschnitt \todo{}).
 
 Um die Grundfunktionen des zu erstellenden Systems zu nutzen, wird außer
-einem aktuellen Desktop-Browser keine weitere Software benötigt. Das
-Spiel wird direkt im Browser ausgeführt, wobei die Steuer-Befehle über
-die jeweils angeschlossene Computer-Tastatur entgegen genommen und
+einem aktuellen Web-Browser \emph{keine} spezielle Software benötigt.
+Das Spiel wird direkt im Browser ausgeführt, wobei die Steuer-Befehle
+über die jeweils angeschlossene Computer-Tastatur entgegengenommen und
 verarbeitet werden.
 
-Alternativ haben Benutzer die Möglichkeit zur Installation einer nativen
-Mobile-App für iPhones und Android-Geräte, die neben der eigentlichen
-Web-App entwickelt wird. Nach dem Koppeln der beiden Applikationen
-erfolgt die Eingabe-Verarbeitung nicht mehr über die Computer-Tastatur,
-sondern über den in der App angezeigten virtuellen \gls{controller}, der
-einem originalen SNES-Controller nachempfunden ist. Das Prinzip ist in
-Abbildung \ref{fig:spec_overview_2} dargestellt.
+Alternativ haben Benutzer die Möglichkeit die Web-Applikation zusätzlich
+über ihr Smartphone zu öffnen. Die Web-Appliation erkennt das
+entsprechende Gerät und bietet für Smartphones einen anderen
+Funktionsumfang an, als in der Desktop-Version. Nach dem Koppeln der
+Web-App und dem Smartphone erfolgt die Eingabe-Verarbeitung nicht mehr
+über die Computer-Tastatur, sondern über den auf dem Smartphone
+dargestellten virtuellen \gls{controller}. Das Prinzip ist in Abbildung
+\ref{fig:spec_overview_2} dargestellt.
 
 \myfig{Diagramme/Zieldefinition_1_Controller}
    {width=0.6\textwidth}
@@ -64,17 +65,18 @@ Abbildung \ref{fig:spec_overview_2} dargestellt.
    {fig:spec_overview_2}
 
 Neben ihrer Funktion als ``besserer Controller'' schafft die
-Controller-App außerdem die Möglichkeit, dem laufenden Spiel weitere
-(lokale) Spieler hinzuzufügen. Das bedeutet, das pro Browser mehrere
-Spieler vorhanden sein können, die sich einen Bildschirm teilen. Das
-Hinzufügen der lokalen Spieler funktioniert funktioniert dabei so wie
-die Kopplung des Smartphones von Spieler 1 und muss vom Spielleiter
-initiiert werden (siehe Abbildung \ref{fig:spec_overview_3}. Durch diese
-Flexibilität sind verschiedene Spiel-Konfigurationen möglich.
+Smartphone-Variante außerdem die Möglichkeit, dem laufenden Spiel
+weitere (lokale) Spieler hinzuzufügen. Das bedeutet, dass pro
+Web-Browser mehrere Spieler spielen können, die sich einen gemeinsamen
+Bildschirm teilen. Das Hinzufügen der lokalen Spieler funktioniert dabei
+so wie die Kopplung des Smartphones von Spieler 1 und muss vom
+Spielleiter initiiert werden (siehe Abbildung
+\ref{fig:spec_overview_3}). Durch diese Flexibilität sind verschiedene
+Spiel-Konfigurationen möglich.
 
 \myfig{Diagramme/Zieldefinition_2_Controller}
    {width=0.6\textwidth}
-   {This flower was photographed at my home town in 2010.}
+   {Hohe Flexibilität: Spiel-Session mit einem entfernten (rechts) und zwei lokalen Spielern, die sich einen Bildschirm teilen (links).}
    {Home town Test}
    {fig:spec_overview_3}
 
@@ -92,7 +94,7 @@ sind.
 \subsection{Web-Applikation}\label{web-applikation}
 
 Die Web-Applikation besteht aus vier verschiedenen Ansichten, die
-untereinander verknüpft und zwischen denen der Benutzer während der
+untereinander verknüpft sind und zwischen denen der Benutzer während der
 Nutzung navigiert:
 
 \begin{itemize}
@@ -121,22 +123,25 @@ Web-Applikation gestellt werden.
 
 \subsubsection*{Ansicht 1: Startseite}
 
-Die Startseite ist eine keine wirkliche Ansicht. Die Funktion der
-Startseite ist lediglich die Weiterleitung des Benutzers auf eine
+Die Startseite ist keine vom Benutzer sichtbare Ansicht. Die Funktion
+der Startseite ist lediglich die Weiterleitung des Benutzers auf eine
 nachfolgende Ansicht. Ist der Benutzer dem System bekannt, erfolgt eine
 Weiterleitung auf die Lobby-Ansicht. Ist der Benutzer unbekannt, ist
-eine Authentifikation notwendig und der Benutzer wird auf zur
+eine Authentifikation notwendig und der Benutzer wird zur
 Authentifikation-Ansicht weitergeleitet.
 
 \subsubsection*{Ansicht 2: Authentifikation}
 
 Voraussetzung für die Nutzung der Web-Applikation ist die
 Authentifikation des Benutzers. Dabei wird der Benutzer aufgefordert
-einen eindeutigen Benutzernamen auszuwählen. Die Eingabe erfolgt über
-ein herkömmliches Web-Formular, das die Benutzereingaben validiert und
-sicherstellt, dass ein eindeutiger Name gewählt wird. Nach der
-Verarbeitung des Benutzernamens wird dieser im Browser des Nutzers
-gespeichert und die Web-Applikation wechselt zur Lobby-Ansicht.
+einen Benutzernamen zu vergeben. Die Eingabe erfolgt über ein
+herkömmliches Web-Formular. Wird kein Benutzername vergeben, erhält der
+Benutzer einen vom System zufällig generierten Benutezrnamen.
+Benutzernamen müssen nicht eindeutig sein -- die Identifikation erfolgt
+über eine eindeutige Benutzer-ID, die nicht angezeigt wird. Nach der
+Verarbeitung des Benutzernamens wird dieser, zusammen mit weiteren
+Informationen, im Browser des Nutzers gespeichert und die
+Web-Applikation wechselt zur Lobby-Ansicht.
 
 \subsubsection*{Ansicht 3: Lobby}
 
@@ -188,26 +193,115 @@ auf die Lobby-Ansicht weitergeleitet.
 
 \newpage
 
-\todo{Gehört hier nicht hin}{Voraussetzung für ein netzwerkbasiertes Multiplayer-Spiel ist eine aktive Verbindung zwischen allen Mitspielern eines Spiels.
+\todo{Passt wahrscheinlich besser woanders hin}{Voraussetzung für ein netzwerkbasiertes Multiplayer-Spiel ist eine aktive Verbindung zwischen allen Mitspielern eines Spiels.
 Wie diese Verbindung zustande kommt, ist von System zu System unterschiedlich. Bei den meisten Emulatoren ist es notwendig, einen Spieler als Spielleiter zu bestimmen. Das Emulator-Programm dieses Spielers wird dabei im Host-Modus gestartet und bietet einen Netzwerkdienst an, der über das Internet erreichbar sein muss und deren Adresse den Mitspielern mitgeteilt werden muss. Dieses Verfahren hat mehrere Nachteile, die bereits in Kapitel \todo{} erläutert wurden. Eine bessere Lösung, die sich mittlerweile auch durchgesetzt hat, ist das Konzept einer Spiel-Lobby, in dem alle laufenden Spiele aufgelistet sind. Die Lobbys verfügen meist über Such- und Filterfunktionen zum Finden des gesuchten Spiels. Die Lobby ist eine Lösung für das *Matchmaking* und erleichtert das, in dem es die Komplexität des Vorgangs, die im erstgenannten Ansatz vorhanden ist (IP-Adressen, Netzwerk-Konfiguration, Firewalls, etc.), vor den Spielern verbirgt.}
 
 \subsection{Controller-Applikation}\label{controller-applikation}
 
-\todo{}
+Die Controller-Applikation ist keine native Smartphone-App, sondern ein
+Modul der Web-Applikation. Sie wird angezeigt, sobald die
+Web-Applikation mit einem Smartphone über einen Web-Browser geöffnet
+wird. Da der Funktionsumfang sich komplett von der Web-Applikation
+unterscheidet, ist eine Unterteilung beider Applikationen sinvoll.
 
-\subsection{Weitere Anforderungen}\label{weitere-anforderungen}
+Die Controller-App soll die Eingabe der Steuerbefehle beim Spielen
+erleichtern, in dem die verschiedenen Tasten des \gls{snes}-Controllers
+auf einem Smartphone dargestellt werden. Die Tasten werden über ein
+Tippen auf die Smartphone-Oberfläche betätigt und zur Web-Applikation
+übertragen, wo deren eigentliche Verarbeitung stattfindet.
 
-\todo{Unterstützte Spiele}
+Für ihren Einsatz muss Controller-App mit der Web-App gekoppelt werden.
+Initiiert wird die Kopplung über die Oberfläche der Web-Applikation.
+Dazu wird auf der Web-Applikation ein QR-Code angezeigt, der über das
+Smartphone und die Controller-App gescannt werden muss. Nach dem Scannen
+ist der Kopplungsvorgang abgeschlossen. Jeder Spieler kann sein eigenes
+Smartphone koppeln und damit seine Spielfigur über das Smartphone
+steuern.
+
+Weiter soll es jedem Spieler ermöglicht werden, über eine Schaltfläche,
+die auf der Web-Applikation dargestellt wird, einen weiteren lokalen
+Mitspieler hinzuzufügen, sofern das Spiel weitere Spieler unterstützt
+--- die maximale Spielerzahl wird vom Spielleiter während der
+Spielerstellung festgelegt. Das Hinzufügen des lokalen Mitspielers ist
+identisch zu dem beschriebenen Kopplungsvorgang: Anzeige und Scan in der
+Web-Applikation angezeigten QR-Codes. Nach der Kopplung ist der lokale
+Mitspieler Teil des Spiels.
+
+\myfig{Diagramme/Controller_Flow}
+   {width=0.4\textwidth}
+   {Controller-App}
+   {Ansichten und Navigationspfad der Controller-App.}
+   {fig:spec_overview_2}
+
+Die Controller-App besteht aus zwei Ansichten, deren Funktionen
+gemeinsam den gesamnten Funktionsumfang der App ergeben.
+
+\subsubsection{Ansicht 1: Startseite}\label{ansicht-1-startseite-1}
+
+Die Startseite wird angezeigt, sobald der Benutzer die Web-Applikation
+auf einem Smartphone öffnet. Die Startseite beinhaltet eine Schaltfläche
+zum Scannen eines QR-Codes. Wird diese angetippt, wird Ansicht 1
+angezeigt.
+
+\subsubsection{Ansicht 1: QR-Scan}\label{ansicht-1-qr-scan}
+
+Die Scan-Ansicht öffnet die Kamera-Ansicht des Smartphones und bietet
+die Möglichkeit zum Scannen des von der Web-App dargestellten QR-Codes.
+Dazu muss der QR-Code wie üblich mit der Kamera erfasst werden. Sobald
+der QR-Code ausgelesen wurde, erfolgt die Kopplung mit der
+Web-Applikation und die Weiterleitung zur nächsten Ansicht erfolgt.
+
+\subsubsection{Ansicht 2: Virtueller
+Controller}\label{ansicht-2-virtueller-controller}
+
+Diese Ansicht wird dargestellt, sobald die Controller-App mit der
+Web-Applikation gekoppelt ist. Sie dient nachfolgend als Eingabegerät,
+über das das Spiel gesteuert wird. Hier werden die Buttons des
+\gls{snes}-Controllers über entsprechende Schaltflächen nachgeahmt.
+Jeder Fingertipp auf eine Schaltfläche der Controller-App wird an die
+Web-Applikation weitergeleitet.
 
 \section{Nichtfunktionale
 Anforderungen}\label{nichtfunktionale-anforderungen}
 
-\todo{}
+Die nichtfunktionalen Anforderungen beschreiben die Qualitätbedingungen
+des zu entwickeltenden Systems. Sie werden ebenfalls während der
+Evaluation überprüft.
 
 \subsection{Leistung- \&
 Qualitätsanforderungen}\label{leistung--qualituxe4tsanforderungen}
 
-\todo[inline]{Frames und Latenz} \todo[inline]{im LAN, nicht Internet}
+Die Emulation der \gls{snes}-Spiele im Browser ist das Herz des Systems
+und die wichtigste Funktion. Die Spiele sollen flüssig laufen, die
+Verzögerung zwischen der Ausgabe von Video und Audio soll minimal sein.
+Der erste Aspekt kann über die Metrik Frames gemessen werden - der Wert
+beschreibt die Anzahl Bilder pro Sekunde. Der Wert sollte nicht unter 60
+liegen. Die Audiolatenz soll so gering wie möglich sein, eine
+Verzögerung zwischen Bild und Ton hängt von der Implementation und
+Konfiguration des Emulators sowie des Computers ab, auf dem die
+Emulation läuft. Ein Wert von unter 100 ms wird angestrebt.
+\todo[inline]{https://gamedev.stackexchange.com/questions/74973/maximum-audio-delay-before-the-player-notices}
+
+Ein weiterer wichtiger Aspekt ist die Netzwerk-Latenz zwischen den
+einzelnen Spielern und den von Ihnen verwendeten Web-Browsern. Für ein
+gutes Spiel-Erlebnis muss die Latenz so gering wie möglich sein. Die
+System-Architektur muss entsprechend darauf hin optimiert sein. Die Höhe
+der Netzwerk-Latenz ist aber nicht nur abhängig von der gewählten
+System-Architektur und der konkreten Implementation, sondern hängt in
+erster Linie von physikalischen Faktoren ab, auf die Software-Entwickler
+keinen Einfluss haben: Je weiter zwei Spieler geographisch voneinander
+entfernt sind, desto höher ist die Latenz zwischen ihnen. Ein Spiel
+zwischen zwei Berlinern wird eine geringe Latenz aufweisen als ein Spiel
+zwischen einem Berliner und einem Spieler aus Paris. Einen absoluten
+Zielwert für die Netzwerk-Latenz zu nennen ist also nicht sinnvoll. Um
+trotz dessen eine Aussage zur Qualität bzgl. diesen Aspekts zu machen,
+wird für die Evaluation vorausgesetzt, dass sich alle Spieler eines
+Spiels im selben Subnetz des selben Netzwerks befinden -- also z. B. im
+selben WLAN eines Routers. Die Netzwerk-Latenz ist unter diesen
+Voraussetzungen für alle Teilnehmer vergleichbar gering. Diese
+Einschränkung ermöglicht es, die Netzwerk-Latenz auszuklammern und den
+Fokus auf die Untersuchung zu legen, wie viel Latenz vom System
+zusätzlich erzeugt wird.
 
 \subsection{Anforderungen an die
 Umgebung}\label{anforderungen-an-die-umgebung}
@@ -218,8 +312,8 @@ ist ebenfalls nur dann gegeben.
 
 \subsubsection{Nutzungsbedingungen}\label{nutzungsbedingungen}
 
-Grundsätzlich unterstützt das System alle modernen Desktop-Browser, die
-folgende Standards vollständig und fehlerfrei unterstützen:
+Grundsätzlich unterstützt das System alle modernen Browser, die folgende
+Standards vollständig und fehlerfrei unterstützen:
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -261,9 +355,10 @@ diejenigen Web-Browser hin optimiert, die bei einem manuellen Vergleich
 die höchste Kompatibilität haben und die Software standardkonform
 ausführen.
 
-Mobile Web-Browser (wie z. B. \glqq{}Mobile Safari\grqq{}) werden
-grundsätzlich nicht unterstützt, da die entsprechenden Standards noch
-nicht implementiert und integriert worden sind\todo{Datum?}.
+\todo[inline]{Browser-Liste, die die Anfordungen im Moment erfüllen?}
+
+Um die Controller-App nutzen zu können, muss das Smartphone über eine
+Kamera verfügen.
 
 \subsubsection{Betriebsbedingungen}\label{betriebsbedingungen}
 
@@ -272,30 +367,26 @@ Stack\grqq{}) und benötigt neben verschiedenen Software-Bibliotheken
 keine weiteren Module, die außerhalb des Kontextes dieser Arbeit
 entstanden
 sind\todo{Meine eigenen, evtl. vorher entwickelten. Third-Party natürlich.}.
-Das Aufbauen auf bestehenden Teillösungen wird angestrebt und die
-Integration derer dokumentiert. Voraussetzung für den Betrieb ist ein
-Linux-Betriebssystem mit Unterstützung für \gls{docker}. Alle benötigten
-Software-Pakete werden automatisch innerhalb der Docker-Umgebung
-installiert und konfiguriert.
+Voraussetzung für den Betrieb ist ein Linux-Betriebssystem mit
+Unterstützung für \gls{docker}. Alle benötigten Software-Pakete werden
+automatisch innerhalb der Docker-Umgebung installiert und konfiguriert.
 
 Das System ist nicht auf maximale Skalierbarkeit hin optimiert, weil
 dies außerhalb des Kontextes dieser Arbeit liegt. Anfragen kleinerer
-Benutzergruppen von 10-20
-\todo{Nach Evaluation mit tatsächlicher Zahl ersetzen}gleichzeitigen
-Nutzern, die gegebenenfalls während einer Testphase verarbeitet werden
-müssen, sollen sich nicht negativ auf die beschriebene Qualität
-auswirken.
+Benutzergruppen von ca. 10-20 gleichzeitigen Nutzern, die gegebenenfalls
+während einer Testphase verarbeitet werden müssen, sollen sich nicht
+negativ auf die beschriebene Qualität auswirken.
 
 \subsection{Randbedingungen \&
 Abgrenzungskriterien}\label{randbedingungen-abgrenzungskriterien}
 
-\begin{itemize}
-\tightlist
-\item
-  Keine Benutzerkonten.
-\item
-  Keine Lag-Kompensation.
-\item
-  Eine Optimierung der \gls{accessibility} der Web-Applikation ist aus
-  Zeitgründen nicht möglich.
-\end{itemize}
+Dieser Abschnitt beschreibt Funktionen, die nicht Teil der
+Implementation des Systems sind bzw. Kriterien, die -- meist aufgrund
+der begrenzten Zeitfensters -- nicht an das System gestellt werden
+können.
+
+\begin{description}
+    \item [Benutzverwaltung] Für das System wird auf ein herkömmliche Benutzerverwaltung mit Registrierung \& Login verzichtet. Der Nutzer wird einzig über eine eindeutig generierte Identifikationsnummer authentifiziert, die im Browser hinterlegt wird. Geht diese verloren, erhält der Spieler beim nächsten Besuch eine neue Nummer.
+    \item [Netzwerk-Latenz] Das System implementiert kein System zur Kompensation der Latenz (dies beinhaltet jegliche Latenz: Netzwerk, Audio/Video, weitere).
+    \item [Accessibility] Eine Optimierung der \gls{accessibility} des Systems findet nicht statt.
+\end{description}
