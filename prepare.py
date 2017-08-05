@@ -65,7 +65,7 @@ def make(sources: List[str], targetfn: Callable[[str], str], cmd_tpl: str):
             target = targetfn(source)
 
             if (os.path.exists(target) and
-                os.stat(target).st_mtime > os.stat(source).st_mtime):
+                    os.stat(target).st_mtime > os.stat(source).st_mtime):
                 print('CONFLICT: Source file was changed since last run, but target file is newer.')
                 print(f'Source: {source}')
                 print(f'Target: {target}')
@@ -73,7 +73,8 @@ def make(sources: List[str], targetfn: Callable[[str], str], cmd_tpl: str):
                 continue
 
             target_dir = os.path.dirname(target)
-            if not os.path.exists(target_dir):
+            if len(target_dir) > 0 and not os.path.exists(target_dir):
+                print(target_dir)
                 os.makedirs(target_dir)
 
             target_rel = os.path.relpath(target, start=os.getcwd())

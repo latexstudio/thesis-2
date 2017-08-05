@@ -7,95 +7,434 @@ Erläuterungen schaffen ein Grundverständnis für die in den nachfolgenden
 Kapiteln behandelten Aspekte und sind für eine Beurteilung der
 entwickelten Lösung notwendig. Schwerpunkte sind für die Zielsetzung
 potentiell geeignete Web-Technologien, Emulatoren \& ROMs und
-Grundlagenthemen zur Kommunikation in Computer-Netzwerken.
+Grundbegriffe aus dem Bereich der Kommunikation in Computer-Netzwerken.
 
-\newpage
-
-\section{Emulation von
-Konsolenspielen}\label{emulation-von-konsolenspielen}
+\section{SNES-Emulation}\label{snes-emulation}
 
 Wie eingangs erwähnt, sind zum Spielen von \gls{snes}-Spielen am
 Computer zwei Dinge notwendig: Ein Emulationsprogramm --- auch
 \gls{emulator} genannt --- und das jeweilige Konsolenspiel, das
-ausgeführt werden soll. Das Spiel liegt dabei in Form einer Datei vor.
+ausgeführt werden soll.
+
+Der Emulator ist ein Software-Programm, das die Ausführung von Spielen
+ermöglicht, die ursprünglich für eine spezifische Konsole entwickelt und
+auf diese hin optimiert worden sind. Bei der Emulation wird die Hardware
+der jeweiligen Konsole nachgeahmt. Die verschiedenen physischen
+Komponenten der Konsole (CPU, Soundchip, etc.) sind dabei so in Software
+implementiert, dass sie sich möglichst so verhalten, wie die
+nachzuahmende Hardware. Erst eine exakte Emulation der ursprünglichen
+Laufzeitumgebung ermöglicht die Ausführung von unveränderten Spielen in
+Form von ROM-Dateien. Durch die Emulation der originalen Hardware kann
+ein Großteil der Spiele unverändert ausgeführt werden.
+
+Das Spiel liegt dabei in Form einer Datei vor.
 Sie beinhaltet die exakt gleichen Daten, die sich für gewöhnlich auf den
 Modulen befinden, die zum Spielen in die Konsolen gesteckt werden
-müssen. Zum Kopieren der Daten existieren spezielle Geräte, mit denen
+müssen. Zum Kopieren der Daten existiert spezielle Hardware, mit denen
 eine solche Datei erzeugt werden kann. Dabei wird ein genaues Abbild des
-Moduls erzeugt, inklusive der Sektoren und der jeweiligen
+Spielmoduls erzeugt, inklusive der Sektoren und der jeweiligen
 Dateisystem-Struktur. Die Dateien werden oft als ROMs bezeichnet, da die
 Daten des Spiels innerhalb des Moduls in einem ROM-Chip gespeichert
-sind. Um ein Spiel auszuführen zu können, muss die Spiel-Datei in den
-Emulator geladen werden.
+sind. ROM-Dateien beinhalten neben dem unveränderten Abbild weitere
+Metadaten, die ebenfalls in der Datei abgelegt werden. Die genaue
+Dateistruktur hängt vom jeweiligen Format der ROM-Datei ab, von denen
+eine Vielzahl für verschiedenste Zielsysteme existieren. Am geläufigsten
+für das \gls{snes} sind die Dateiformate \emph{SMC} und \emph{SMC}. Um
+ein Spiel auszuführen zu können, muss eine ROM-Datei in einen Emulator
+geladen werden, der das jeweilige Format unterstützt.
 
-Der Emulator ist ein Software-Programm, das es ermöglicht Konsolentitel
-auf einem Computer auszuführen. Dies funktioniert, in dem die Hardware
-der jeweiligen Konsole nachgeahmt wird. Die verschiedenen Komponenten
-der Konsole (CPU, Soundchip, etc.) sind dabei so in Software
-implementiert dass sie sich möglichst so verhalten, wie die
-nachzuahmende Hardware. Erst eine möglichst exakte Emulation der
-ursprünglichen Laufzeitumgebung ermöglicht die Ausführung von
-unveränderten Spielen in Form von ROM-Dateien. Die Spiele, bzw. das
-Abbild der Software, ist eine exakte Kopie des Originals.
+\subsection{Portabilität}\label{portabilituxe4t}
 
-\begin{itemize}
-\tightlist
-\item
-  Roms
-\item
-  Emulatoren
-\end{itemize}
+Die bekanntesten und am meisten verwendeten (FIXME: Quelle)
+SMES-Emulatoren sind snes9x, zsnes und bsnes. Eine Übersicht über deren
+Eigenschaften ist in Tabelle FIXME aufgeführt.
 
-\section{Der Multiplayer-Modus}\label{der-multiplayer-modus}
+Bemerkenswert ist die Tatsache, dass die Ausführung eines Emulators mit
+hoher Genauigkeit (bsnes) sehr rechenintensiv ist.
 
-\todo[inline]{Im Netzwerk! Im Gegensatz zum lokalen Multiplayer.}
-\todo[inline]{Welche Eigenschaften/Merkmale hat der lokale Multiplayer, die auch im Netzwerk-Multiplayer gelten sollen}
+\begin{longtable}[]{@{}llll@{}}
+\toprule
+Emulator & Betriebssystem & Genauigkeit &
+System-Anforderungen\tabularnewline
+\midrule
+\endhead
+bsnes & Windows, Linux, macOS & Sehr hoch & Hoch\tabularnewline
+snes9x & Multi-Plattform & Hoch & Gering\tabularnewline
+zsnes & Multi-Plattform & Gering & ~Gering\tabularnewline
+RetroArch \\ (snes9x,\\ bsnes) & Multi-Plattform & - &
+-\tabularnewline
+\bottomrule
+\end{longtable}
 
-Das erste entwickete Computerspiel war ein Multiplayer-Spiel und
-benötigte damit mindestens zwei Spieler, die gemeinsam an einem Gerät
-spielen. Die Verarbeitung der Benutzereingaben erfolgt zentral an dem
-einzigen Gerät, so wie auch die Darstellung der grafischen Oberfläche.
+Quelle:
+\url{http://emulation-general.wikia.com/wiki/Super_Nintendo_emulators}
 
-\section{Grundbegriffe der
-Netzwerk-Kommunikation}\label{grundbegriffe-der-netzwerk-kommunikation}
+Neben den in der Tabelle aufgeführten Emulatoren existieren jeweils eine
+handvoll Varianten (Forks), die verschiedene Verbesserungen oder
+Veränderungen hinzufügen oder auch entfernen. Als Beispiel sei hier
+\emph{snes9x2000} genannt, eine Re-Implementierung von snes9x in C
+(statt C++).
 
-\todo[inline]{Evtl. ganz an den Anfang schieben, damit man im Multiplayer-Abschnitt darauf verweisen kann.}
+Zusätzlich zu den in der Tabelle aufgeführten Betriebssysteme existieren
+Emulatoren auch in Form nativer Apps für das Smartphone, die über die
+jeweiligen App Stores bezogen werden können.
 
-\subsection{Latenz}\label{latenz}
+Emulatoren können nicht nur auf dem Desktop und dem dem Smartphone
+genutzt werden --- mittlerweile ist auch die direkte Ausführung im
+Web-Browser möglich. Diese direkte Ausführung basiert auf JavaScript und
+weiteren Web-Standards und benötigt darum keine Browser-Plugins. Um
+Software im Browser ausführen zu können, muss diese entweder direkt in
+JavaScript implementiert sein oder in einer anderen vom Browser
+ausführbaren Form vorliegen (FIXME: asm.js oder WebAssembly). Bei den
+Projekten RetroArch und xnes findet die zweitgenannte Methode Anwendung:
+Der eigentliche Quellcode ist kein JavaScript-Code und muss daher mit
+Hilfe eines Übersetzungsprogramms in eine im Browser ausführbare Form
+überführt werden. Beide Projekte verwenden für die Übersetzung das
+Framework \emph{Emscripten}.
 
-\begin{itemize}
-\tightlist
-\item
-  Minimalste Latenz essentiell beim Spielen
-\item
-  Alles über \unit[N]{ms} ist nicht gut genug. Um angepeilten
-  Maximalwert zu erreichen, System entsprechend konstruieren und
-  Technologien wählen, die eine hinreichende Lösung erst möglich machen.
-\item
-  Wo von hängt Latenz ab? Was kann man da überhaupt machen?
-\item
-  RTT, TCP vs.~UDP?
-\end{itemize}
+\section{Emscripten}\label{emscripten}
 
-\subsection{RTT}\label{rtt}
+Emscripten ist ein Projekt und ein gleichnamiger Compiler, der es
+erlaubt ein Programm, das in Form von LLVM-Bitcode vorliegt,
+in JavaScript-Code zu übersetzen. Der JavaScript-Code ist dann
+ohne weiteres in einem Web-Browser ausführbar. Bei LLVM-Bitcode handelt
+es sich um einen \emph{Zwischencode}, der während des Kompiliervorgangs
+mit einem LLVM-Compiler (z. B. \emph{clang}) erzeugt wird. clang kann
+verwendet werden, um C/C++-Quellcode zu übersetzen. Grundsätzlich
+unterstützt Emscripten aber auch weitere Systeme, sofern diese
+LLVM-Bitcode erzeugen. Neben dem JavaScript-Code enthält die erzeugte
+Datei auch die Emscripten-Runtime, die für die Ausführung im Browser
+benötigt wird.
 
-\subsection{Realtime}\label{realtime}
+\myfig{Grundlagen/Emscripten_Funktionsweise}
+   {width=0.9\textwidth}
+   {Emscripten: Übersetzung eines Programms nach JavaScript.}
+   {Emscripten: Funktionsweise}
+   {fig:basics_emscripten_moo}
+
+Bei der Übersetzung eines Programms durch Emscripten entsteht ein neues
+Programm, das in die eigene Web-Applikation integriert und aufgerufen
+werden kann. Der Code läuft dabei direkt im Browser, da das
+Original-Programm in ein Format überführt wurde, das direkt im Browser
+ausführbar ist. Aktuell unterstütze Formate sind \emph{asm.js} und
+\emph{WebAssembly}.
+
+\subsection{Voraussetzungen}\label{voraussetzungen}
+
+Um ein Programm mit Emscripten zu übersetzen und das Ergebnis im Browser
+auszuführen, muss das Programm bestimmte Voraussetzungen erfüllen. Denn
+selbstverständlich stehen im Browser nicht alle
+Programmierschnittstellen zur Verfügung, die auf einem Desktop-System
+(z. B. Windows) vorhanden sind. Es handelt sich um eine neue
+Laufzeitumgebung, in der viele Funktionen nicht verfügbar sind. Die in
+jedem mit Emscripten übersetzenden Programm enthaltene Laufzeitumgebung
+implementiert verschiedene Schnittstellen:
+Hervorzuheben ist SDL. SDL ist ein Multimedia-Framework, das dank
+Emscripten auch im Browser verfügbar ist. Eingesetzt werden kann es für
+grafische Darstellungen, Eingabe-Verarbeitung, die Audio-Ausgabe und
+weitere. Wenn das Programm über die entsprechenden Funktionen verfügen
+soll, müssen diese mit SDL umgesetzt werden. Der Anpassungsaufwand ist,
+neben weiteren Aspekten, primär davon abhängig wie hoch der Aufwand der
+Portierung des Programms nach SDL ist. Wenn das Projekt groß ist und beispielsweise
+OpenGL verwendet wurde, ist der Aufwand sehr hoch. Verwendet das Projekt
+bereits SDL, sind gegebenenfalls nur wenige Anpassungen notwendig.
+
+\subsection{Anwendungsbeispiel}\label{anwendungsbeispiel}
+
+Dieser Abschnitt soll das Verständnis von Emscripten und dessen
+Funktionsweise durch ein praktisches Beispiel verdeutlichen.
+
+Ein fertiges Tetris-Spiel soll als Webseite online spielbar sein.
+Das Projekt soll für die weitere Entwicklung vorbereitet werden.
+Bestehen tut das Projekt aus einer HTML-Datei und einer JavaScript-Datei, die
+über das HTML-``script''-Element in die HTML-Datei eingebunden wird. Das
+Spiel ist in SDL implementiert und verwendet für die grafische
+Darstellung, die Audio-Ausgabe und die Eingabe-Verarbeitung die
+entsprechenden SDL-Funktionen -- eine Portierung ist nicht notwendig.
+Die genannten Programmteile liegen als C-Modul vor und befinden sich
+in der Datei \emph{Tetris.c}. Die Struktur des Projekts ist in Abbildung
+\ref{fig:basics_emscripten_usage_1} dargestellt.
+
+\myfig{Grundlagen/Emscripten_Verwendung_1}
+   {width=0.4\textwidth}
+   {Anwendungsbeispiel von Emscripten (1/3)}
+   {Emscripten: Verwendung (1/3)}
+   {fig:basics_emscripten_usage_1}
+
+Um nun von der JavaScript-Applikation (\emph{App.js}) auf den
+eigentlichen Spielcode zuzugreifen, muss dieser mit Emscripten nach
+JavaScript übersetzt werden (Abbildung \ref{fig:basics_emscripten_usage_2}).
+
+\myfig{Grundlagen/Emscripten_Verwendung_2}
+   {width=0.9\textwidth}
+   {Anwendungsbeispiel von Emscripten (2/3)}
+   {Emscripten: Verwendung (2/3)}
+   {fig:basics_emscripten_usage_2}
+
+Die dabei entstandenen Dateien werden in die HTML-Datei eingebettet. Nun
+können die C-Funktionen des Tetris-Moduls direkt aus der JavaScript-App
+heraus aufgerufen werden (Abbildung \ref{fig:basics_emscripten_usage_3}).
+
+\myfig{Grundlagen/Emscripten_Verwendung_3}
+   {width=0.9\textwidth}
+   {Anwendungsbeispiel von Emscripten (3/3)}
+   {Emscripten: Verwendung (3/3)}
+   {fig:basics_emscripten_usage_3}
+
+\section{Latenz}\label{latenz}
+
+Die Definition des Latenz-Begriffs hängt stark vom Kontext ab, in dem er
+gebraucht wird. Für den Benutzer dieser Web-Applikation ist die Latenz
+die Zeit, die vergeht, bis eine auf der Oberfläche getätigte Aktion (zum
+Beispiel eine Eingabe über die Tastatur) zu einem beobachteten Effekt
+auf der Webseite führt. Diese gefühlte ``Gesamtlatenz'' ist von vielen
+Faktoren abhängig, von denen viele nicht beinflussbar sind, weil ihnen
+physikalische Grenzen gesetzt sind und schon die verwendeten Technologien
+Latenzen erzeugen. Beim Versenden von Paketen über das
+Netzwerk begrenzt spätestens die Lichtgeschwindigkeit die maximale
+Übertragungsgeschwindigkeit: Ein Netzwerkpaket, das über eine
+Glasfaserverbindung transportiert wird, legt die Strecke von knapp 6000
+km zwischen New York und London in 28 ms zurück, die Paketumlaufzeit
+beträgt entsprechend (Round-trip Time, RTT) von 56 ms. Die
+Netzwerk-Latenz sollte also nicht unterschätzt werden. Trotzdem ist sie
+nur ein Faktor von vielen, den es zu bedenken gilt: Ein Computer-System
+besteht aus vielen Komponenten, die untereinander kommunizieren und
+Informationen austauschen: Dabei führt jede Berechnung, die eine CPU
+zusätzlich ausführen muss, letztlich zu einer höheren Gesamtlatenz.
+
+\myfig{Grundlagen/Latenz}
+   {width=0.6\textwidth}
+   {Jede der dargestellten Ebenen trägt zu der Gesamtlatenz Applikation bei.}
+   {Latenz}
+   {fig:basics_latency}
+
+Abbildung \ref{fig:basics_latency} zeigt eine abstrakte Darstellung der Ebenen des Systems
+und den Übergängen zwischen den Ebenen, an denen eine spürbare Latenz
+vorhanden sein wird. Wichtig ist die Tatsache, dass das Auftreten von
+Latenzen grundsätzlich unvermeidlich und teilweise nicht beeinflussbar
+ist. Deswegen sollten diejenigen Stellen analysiert werden, auf die
+Einfluss genommen werden kann. Dabei sollte abgewogen werden, ob sich
+der durch die Optimierung enstandende Mehraufwand lohnt und dies bei der
+Systemplanung berücksichtigen.
+
+\section{Single-Page Applications}\label{single-page-applications}
+
+Single-Page Applikations, kurz SPAs, sind Web-Applikationen, die aus
+einer HTML-Seite bestehen, die vom Webserver an den Client ausgeliefert
+wird. Alle nachfolgenden benötigten Ressourcen werden von der
+Applikation asynchron nachgeladen und der Inhalt der HTML-Seite
+\emph{in-place} verändert. Das Frontend wird dabei meist in JavaScript
+und unter Zuhilfenahme von entsprechenden Frontend-Frameworks, wie z. B.
+React.js oder Vue.js, implementiert. Das Backend-System bietet in einer
+SPA meist eine REST-API an: Die Essenz davon ist die Bereitstellung und
+der Zugriff auf die Datenbasis der Applikation über HTTP. Dabei werden
+den verschiedenen HTTP-Methoden (GET, POST, etc.) den entsprechenden
+\acrshort{crud}-Operationen zugeordnet. Eine REST-API wird als vom Frontend
+unabhängiger Netzwerkdienst betrieben, auf den das Frontend mit
+verschiedenen Methoden zugreift, um Datensätze über die definierte
+REST-Schnittstelle abzufragen oder Änderungen in der Datenbank zu
+persistieren. Die Kommunikation zwischen Frontend und Backend in einer
+SPA erfolgt meist über AJAX bzw. über den in JavaScript eingebauten
+XmlHttpRequest-Mechanismus. Als Transportprotokoll für REST-Dienste
+würde ursprünglich XML verwendet; inzwischen setzt sich \acrshort{json}
+immer mehr durch.
+
+\todo[inline]{Setze ich zu viel voraus?
+              Unterschied zu traditioneller Architektur mehr hervorheben?
+              Evtl. noch ein Diagramm? Ich wollte den Part nicht so lang machen,
+              da WebRTC sehr detailliert erklärt wird / werden muss.}
 
 \section{Das Realtime-Web}\label{das-realtime-web}
 
-Vergleich zur alten Herangehensweise. Frontend viel Logik, Backends
-eigentlich nur noch API.
+Eine Echtzeit-Web-Applikation setzt auf den Prinzipien einer SPA auf.
+Der Unterschied: SPAs basieren darauf, dass Anfragen stets vom Frontend
+ans Backend gesendet und von diesem beantwortet werden. Eine
+Datenübertragung, die vom Backend initiiert wird, existiert bei dieser
+Architektur nicht: Das Frontend muss regelmäßig beim Backend anfragen,
+ob aktualisierte Daten vorliegen (Polling).
 
-\subsection{Websockets}\label{websockets}
+Bei Realtime-Web-Apps erfolgt die Kommunikation in beide Richtungen. Das
+bedeutet, dass Änderungen vom Backend direkt im Frontend ersichtlich
+werden, da ein Kommunikationskanal verwendet wird, bei dem der Server
+dem Client Nachrichten senden kann. Daten müssen nicht regelmäßig vom
+Frontend angefragt werden, sondern werden vom Backend an das Frontend
+gesendet, sobald diese verfügbar sind (Push).
+
+Für die Kommunikation zwischen Server und Client bietet sich z. B. der
+Einsatz von WebSockets an, da es ein effizienter Transport-Mechanismus
+mit geringer Latenz ist und Multiplexing beherrscht.
+
+\subsection{Server-Sent Events (SSE)}\label{server-sent-events-sse}
+
+Server-Sent Events ermöglichen das Streamen von textbasierten Daten vom
+Server zum Client (Browser). Die Datenübertragung erfolgt über eine
+Verbindung, die einmal aufgebaut und automatisch aufrecht erhalten wird.
+Die Daten fließen bei Server-Sent Events stets in eine Richtung: vom Server zum Client.
+Die Übertragung von Binärdaten ist über Umwege
+möglich, aber ineffizient. SSE bietet sich für ein Server-Client -Modell
+an, bei dem der Browser die vom Server erhaltenen textuellen Daten
+anzeigt und selbst keine Anfragen stellt.
+
+(Vgl. \cite{Grigorik2013}, S. 279 ff.)
+
+\subsection{WebSockets}\label{websockets}
+
+WebSockets ermöglicht das bidirektionale nachrichtenorientierte Streamen
+von sowohl Text als auch Binärdaten. Das Nachrichtenformat kann frei
+gewählt werden. Das Aufrechterhalten der Verbindung, eine Komprimierung
+der übermittelten Daten, Caching und andere Aspekte sind nicht Teil von
+WebSockets und müssen in der jeweiligen Applikation implementiert
+werden. Der Einsatz bietet sich an, sofern eine bidirektionale
+Kommunikation zwischen Server und Client (Browser) benötigt wird und ein
+benutzerdefiniertes Nachrichten-Protokoll eingesetzt werden muss, z. B.
+weil Binärdaten ausgetauscht werden sollen.
+
+(Vgl. \cite{Grigorik2013}, S. 287 ff.)
 
 \subsection{HTTP/2}\label{http2}
 
-\subsection{SSE}\label{sse}
+HTTP/2 ist die nächste Version des \Gls{http}. Ein
+wichtiges Ziel von HTTP/2 ist die allgemeine Reduktion der auftretenden Latenz,
+indem pro Netzwerk-Verbindung effizient mehrere Request/Response-Nachrichten zwischen
+Server und Client ausgetauscht werden können (Multiplexing). Wird HTTP
+1.x ohne Pipelining eingesetzt, muss für jede Nachricht eine neue neue
+Netzwerk-Verbindung aufgebaut werden. Da HTTP auf TCP basiert, führt
+dieser Umstand zu einem großen Overhead, weil für jede Anfrage ein neuer
+TCP-Handshake ausgeführt werden muss. Mit Pipelining kann hingegen das
+Phänomen des Head-of-Line-Blockings enstehen, bei dem pro Verbindung
+mehrere Anfragen vom Client an den Server gesendet werden, ohne auf die
+dazugehörigen Server-Antworten (Responses) zu warten. Das Problem: Die Anfragen
+müssen vom Server in der richtigen Reihenfolge bearbeitet und
+beantwortet werden: Ist die erste Anfrage langsam, blockiert diese alle
+nachfolgenden.
+
+Weitere Änderungen umfassen den Wechsel von einem textbasierten Protokoll
+(HTTP 1.x) hin zu einem binären Protokoll und die Komprimierung der
+Header-Felder mit \emph{hpack}. An den grundsätzlichen Konzepten von
+HTTP 1.x (HTTP-Methoden, Request/Response-Paradigma, etc.) wird
+festgehalten.
 
 \subsection{WebRTC}\label{webrtc}
 
-\todo[inline]{Hier nur beschreiben. Hier kann ich letztlich auch nur raten,
-dass die gewählten Technologien sinnvoll sein werden. Ob die getroffene Auswahl gut war (wurden Ziele erreicht?), zeichnet sich ggf. schon während der Implementierung ab. 
-Ergebnisse und Erkenntnisse, die die Bildung eines ersten Urteils ermöglichen, werden erst in der Evaluationsphase geschaffen.}
+\gls{webrtc} ermöglicht die direkte Kommunikation zwischen zwei Web-Browsern
+über eine JavaScript-Schnittstelle. WebRTC unterstützt die Übertragung
+von Text- und Binärdaten sowie ein Streaming von Multimedia-Daten (Video,
+Audio), wobei die Paramter der übertragenen Daten (Bitrate, Auflösung,
+etc.) automatisch der verfügbaren Übertragungsbandbreite angepasst
+werden (\emph{Adaptives Streaming}).
 
-\todo[inline]{NICHT: Vergleichen/Abwägen, Entscheiden, Begründen}
+\subsubsection*{Verbindungsaufbau}\label{verbindungsaufbau}
+
+Das Herstellen einer WebRTC-Verbindung ist im \emph{Javascript Session
+Establishment Protocol (JSEP)} beschrieben. Der Verbindungsaufbau
+verläuft in mehreren Schritten.
+
+\textbf{Schritt 1: Austausch der Sitzungsinformationen}
+
+Eine WebRTC-Verbindung wird initiiniert, indem der initiierende
+Web-Browser (\emph{Amys} Web-Browser) eine \emph{Offer}-Nachricht
+generiert, lokal speichert und an den Partner übermittelt. In
+dieser sind Informationen über die vom Web-Browser unterstützen
+Multimedia-Codecs, Netzwerkparameter und weitere für die Sitzung
+relevante Daten enthalten. Die \emph{Offer} ist eine SDP-Nachricht,
+deren Format im \emph{Session Description Protocol (SDP)} beschrieben
+ist. Die vom Partner \emph{Bob} empfangene \emph{Offer}-Nachricht von
+\emph{Amy} wird als \emph{Remote Description} gespeichert. \emph{Bob}
+generiert nun seinerseits eine \emph{Answer}-Nachricht; ebenfalls eine
+SDP-Nachricht. Sie wird lokal abgespeichert und an den Browser von
+\emph{Amy} geschickt, der die in der \emph{Answer} enthaltenen
+Informationen lokal speichert.
+
+\myfig{Grundlagen/WebRTC_JSEP}
+   {width=0.8\textwidth}
+   {JSEP: Abbildung basiert auf \cite{Grigorik2013}, S. 324.}
+   {JSEP}
+   {fig:basics_webrtc_jsep}
+
+Die SDP-Nachrichten müssen über einen
+Datenkanal, den \emph{Signaling Channel} transportiert werden, mit dem
+beide Web-Browser verbunden sind. Die Übertragung der SDP-Nachrichten
+ist nicht Teil von WebRTC und muss von der jeweiligen Applikation
+durchgeführt werden. Wie die Übertragung technisch gelöst wird, ist
+dabei nicht relevant. Abbildung \ref{fig:basics_webrtc_jsep} zeigt den Austausch der
+SDP-Nachrichten (\emph{Offer} \& \emph{Answer}) über den von der Applikation bereitgestellten
+\emph{Signaling Channel}.
+
+\textbf{Schritt 2: Austausch von Konnektivitätsinformationen}
+
+Ein Datenaustausch zwischen zwei Web-Browsern setzt voraus, dass beide
+Systeme über das Netzwerk (z. B. das Internet) erreichbar sind und die
+Netzwerkpakete zum jeweiligen Partner transportiert werden können. Im
+einfachsten Fall befinden sich beide Partner im selben Netzwerk: Hier
+kann die jeweils eigene IP-Adresse einfach ermittelt und in der
+SDP-Nachricht abgelegt werden, bevor diese zum Partner gesendet wird.
+Der Verbindungsaufbau erfolgt dann über die jeweilige IP-Adresse des
+Partners (siehe Abbildung \ref{fig:basics_webrtc_perfect}).
+
+\myfig{Grundlagen/WebRTC_Perfekt}
+   {width=0.6\textwidth}
+   {WebRTC: Verbindungsaufbau und Datenübertragung im lokalen Netzwerk.
+    Abbildung basiert auf Darstellungen von \cite{real-world-signalling}.}
+   {FIXME}
+   {fig:basics_webrtc_perfect}
+
+Befinden sich die Partner \underline{nicht} im selben Subnetz, z. B. wenn die
+Verbindung über das Internet aufgebaut werden soll, ergeben sich zwei
+Probleme:
+
+\textbf{Problem 1:}
+In der SDP-Nachricht sollte eine öffentlich geroutete IP-Adresse
+hinterlegt sein, damit ein Verbindungsaufbau zustande kommen kann. Das
+Bekanntmachen der eigenen lokalen IP-Adresse macht in diesem Fall
+keinen Sinn, da diese vom Partner nicht erreichbar ist. Beim Erzeugen
+der SDP-Nachricht ist die eigene IP-Adresse womöglich nicht bekannt
+und muss erst ermittelt werden: Dies geschieht unter Verwendung durch
+das \gls{ice}.
+
+Zu jeder WebRTC-Verbindung gehört auf jeder Seite ein \gls{ice}-Agent,
+der mehrere Aufgaben erfüllt: Aufrechterhaltung der Verbindung über
+einen Keep-Alive-Mechanismus und die Bereitstellung der lokalen und
+öffentlichen IP-Adressen für die WebRTC-Verbindung. Für die Auflösung
+der öffentlichen IP-Adresse muss beim Aufbau der WebRTC-Verbindung ein
+sogenannter \acrshort{stun}-Server konfiguriert sein --- Abbildung \ref{fig:basics_webrtc_stun}
+zeigt den Vorgang des Verbindungsaufbau nach Integration des \acrshort{stun}-Servers.
+Ohne \acrshort{stun}-Server können die öffentlichen IP-Adressen der Teilnehmer nicht
+aufgelöst werden und ein Verbindungsaufbau scheitert.
+
+\myfig{Grundlagen/WebRTC_STUN}
+   {width=0.9\textwidth}
+   {WebRTC: Verbindungsaufbau nach Integration eines \acrshort{stun}-Servers.
+    Abbildung basiert auf Darstellungen von \cite{real-world-signalling}.}
+   {WebRTC: Integration eines \acrshort{stun}-Servers}
+   {fig:basics_webrtc_stun}
+
+\textbf{Problem 2:}
+Trotz Verwendung von \gls{ice} und \acrshort{stun} besteht die Chance, dass der
+Verbindungsaufbau nicht erfolgreich ist, weil die öffentliche
+IP-Adresse eines Teilnehmers nicht ermittelt werden kann oder die
+Verbindung anderweitig durch eine Netzwerkkomponente (z. B. Firewall) blockiert wird. In diesem
+Fall gibt es die Möglichkeit, dem \gls{ice}-Agent einen zweiten Server-Typ
+hinzuzufügen: einen \acrshort{turn}-Server. Der \acrshort{turn}-Server muss von beiden
+Partnern aus erreichbar sein: Der gesamte Datenverkehr wird nun über
+den \acrshort{turn}-Server geleitet. Eine direkte Verbindung zwischen den
+Web-Browsern existiert nicht. Abbildung \ref{fig:basics_webrtc_turn} stellt die beschriebene
+Situation dar, wobei die rot markierten Punkte jene Aktionen markieren,
+die nicht erfolgreich ausgeführt werden konnten.
+
+\myfig{Grundlagen/WebRTC_TURN}
+   {width=0.9\textwidth}
+   {WebRTC: Verbindungsaufbau nach Integration eines \acrshort{turn}-Servers.
+    Abbildung basiert auf Darstellungen von \cite{real-world-signalling}.}
+   {WebRTC: Integration eines \acrshort{turn}-Servers}
+   {fig:basics_webrtc_turn}
+
+\subsubsection*{Weitere Merkmale}\label{weitere-merkmale}
+
+WebRTC setzt auf UDP auf und ermöglicht den Transport von Text-
+und Binärdaten über das SCTP-Protokoll. Einige Parameter des Transports
+sind konfigurierbar: Das Einhalten der Reihenfolge der gesendeten Nachrichten
+und die Verlässlichkeit können aktiviert werden,
+was bei Aktivierung dazu führt, dass der Transport im Prinzip die
+gleichen Merkmale aufweist wie eine Verbindung auf TCP-Basis. Die
+Übertragung von Streams geschieht über das SRTP-Protokoll, dessen
+Transporteigenschaften ebenfalls konfiguriert werden können.

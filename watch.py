@@ -17,7 +17,7 @@ from watchdog.events import (
 
 # Make will be triggered every time a file changed.
 # But it will wait at least specified seconds.
-MAKE_MIN_PERIOD = 120
+MAKE_MIN_PERIOD = 60
 
 
 logging.basicConfig(
